@@ -1,0 +1,528 @@
+{
+	"TC001_PremiumComprehensivePlan": [
+		{
+		}
+	],
+	"TC002_EssentialComprehensivePlan": [
+		{
+		}
+	],
+	"TC003_OptimumComprehensiveTravelPlan": [
+		{
+		}
+	],
+	"TC004_PrimaryCarePlan": [
+		{
+		}
+	],
+	"TC005_PremiumInternational_StudentPlan": [
+		{
+		}
+	],
+	"TC006_EssentialInternational_StudentPlan": [
+		{
+		}
+	],
+	"TC007_FlexibleUSCare": [
+		{
+		}
+	],
+	"TC008_RoutineMedicalCare": [
+		{
+		}
+	],
+	"TC009_PeopleFlexibleUSCare": [
+		{
+		}
+	],
+	"TC010_PeopleRoutineMedicalCare": [
+		{
+		}
+	],
+	"TC011_RegistrationNeuronPlan": [
+		{
+		}
+	],
+	"TC012_RegistrationWithMultiMembers": [
+		{
+		}
+	],
+	"TC013_RegistrationWithPreExistingMembers": [
+		{
+		}
+	],
+	"TC014_Login": [
+		{
+		}
+	],
+	"TC015_EmployerRegistration": [
+		{
+		}
+	],
+	"TC016_BookDoctor_Appointment": [
+		{
+		}
+	],
+	"TC017_BookDoctor_AppointmentWithExistingMember": [
+		{
+		}
+	],
+	"TC018_BookDoctor_AppointmentWithDateAvailable": [
+		{
+		}
+	],
+	"TC019_BookDoctor_AppointmentWithExistingMemberAvailableDate": [
+		{
+		}
+	],
+	"TC020_EmployerRegistrationWithCheckEmployeeLogin": [
+		{
+		}
+	],
+	"TC021_EmployerRegistrationWithCheckBusinessLogin": [
+		{
+		}
+	],
+	"TC022_PlanSignupWithDoctor": [
+		{
+		}
+	],
+	"TC023_AmountDueCheckOfPlanWithDoctor": [
+		{
+		}
+	],
+	"TC024_RegistrationWithFlexible_US_CarePage": [
+		{
+		}
+	],
+	"TC025_RegistrationWithFlexible_US_CarePage": [
+		{
+		}
+	],
+	"TC026_AddCoverage_to_preexisting_conditionsPolicyMax": [
+		{
+		}
+	],
+	"TC027_ToCheckPolicyMax_DueAmountWithTravelerCount": [
+		{
+		}
+	],
+    "TC001_ValidationCheckForMandatoryField": [
+		{
+		}
+	],
+	"TC002_ValidationCheckForEndDateField": [
+		{
+		}
+	],
+	"TC003_ValidationCheckForEndDateField": [
+		{
+		}
+	],
+	"TC004_ValidationCheckForTravelerDetails": [
+		{
+		}
+	],
+	"TC005_ValidationCheckForDateofBirthTravelerDetails": [
+		{
+		}
+	],
+	"TC006_ValidationCheckForMakePaymentTravelerDetails": [
+		{
+		}
+	],
+	"TC007_ChangePassword": [
+		{
+		}
+	],
+	"TC008_ValidationCheckForExtendDatePremiumComprehensivePlan": [
+		{
+		}
+	],
+	"TC009_LoginWithIncorrectDetails": [
+		{
+		}
+	],
+	"TC010_LoginWithBlankEmail": [
+		{
+		}
+	],
+	"TC011_LoginWithBlankPassword" : [
+		{
+
+		}
+	],
+	"TC012_LoginWithBlankusernameAndPassword": [
+		{
+		}
+	],
+	"TC013_LoginWithValidUsernameInvalidPassword": [
+		{
+		}
+	],
+	"TC014_LoginWithInValidUsernameValidPassword": [
+		{
+
+		}
+	],
+	"TC015_LoginWithNonRegisteredEmail": [
+		{
+
+		}
+	],
+	"TC016_PlanTermPDFValidationPremiumPlan" : [
+		{
+
+		}
+	],
+	"TC017_Exhibit_A_and_BPDFValidationPremiumPlan" : [
+		{
+
+		}
+	],
+	"TC018_ValidatePolicy_ExhibitPDFValidationPremiumPlan" : [
+		{
+
+		}
+	],
+	"TC019_PlanBrochurePDFValidationPremiumPlan" : [
+		{
+
+		}
+	],
+	"TC020_PlanTermPDFValidationEssentialPlan" : [
+		{
+
+		}
+	],
+	"TC021_Exhibit_A_and_BPDFValidationEssentialPlan" : [
+		{
+
+		}
+	],
+	"TC022_Policy_ExhibitValidateEssentialPlan" : [
+		{
+
+		}
+	],
+	"TC023_PlanBrochurePDFValidationEssentialPlan" : [
+		{
+
+		}
+	],
+	"TC024_PrimaryCareCardPDFValidationPremiumPlan" : [
+        {
+
+		}
+    ],
+	"TC025_TravelPlanCardPDFValidationPremiumPlan" : [
+        {
+
+        }
+    ],
+	"TC026_PlanSummaryPDFValidationPremiumPlan" : [
+		{
+
+		}
+	],
+	"TC027_Plan_BrochurePDFValidationPremiumInternationalStudentPlan" : [
+        {
+
+        }
+    ],
+	"TC028_Plan_PricingPDFValidationPremiumInternationalStudentPlan" : [
+		{
+
+		}
+	],
+	"TC029_Plan_BrochurePDFValidationEssentialInternationalStudentPlan" : [
+		{
+
+		}
+	],
+	"TC030_Plan_PricingPDFValidationEssentialInternationalStudentPlan" : [
+		{
+
+		}
+	],
+	"TC031_Pricing_ValidationForRoutineMedicalCarePlan" : [
+       {
+
+	   }
+    ],
+	"TC032_Pricing_ValidationForRoutineMedicalCarePlan3MonthPlan" : [
+		{
+
+		}
+	],
+	"TC033_Pricing_ValidationForRoutineMedicalCarePlan6MonthPlan" : [
+		{
+
+		}
+	],
+	"TC034_Pricing_ValidationForRoutineMedicalCarePlan12MonthPlan" : [
+		{
+
+		}
+	],
+	"TC035_Pricing_ValidationForRoutineMedicalCarePlanFlexibleUSCare" : [
+		{
+
+		}
+	],
+	"TC036_Validation_ForCheckAppointmentTypeVirtualExistingMember" : [
+		{
+
+		}
+	],
+	"TC037_Validation_ForCheckAppointmentTypeIn_personExistingMember" : [
+		{
+
+		}
+	],
+	"TC038_Validation_ForCheckAppointmentTypeIn_personWithNewMember" : [
+		{
+
+		}
+	],
+	"TC039_Validation_ForCheckAppointmentTypeVirtualWithNewMember" : [
+		{
+
+		}
+	],
+	"TC040_Validation_CheckForPlanSignupWithDoctor" : [
+		{
+
+		}
+	],
+	"TC041_Validation_CheckForStartDatPlanFlexibleUSCare" : [
+        {
+
+        }
+    ],
+	"TC042_Validation_CheckForInvalid_BOD_ForPlanFlexibleUSCare" : [
+		{
+
+		}
+   ],
+	"TC001_PremiumComprehensivePlanWithAgent": [
+		{
+
+		}
+
+	],
+	"TC002_EssentialComprehensivePlanWithAgent": [
+		{
+
+		}
+
+	],
+	"TC003_AddBranchHealthCare_Facility": [
+		{
+
+		}
+
+	],
+	"TC004_Verify_MemberAdded_PrimaryCarePlanWithAgent": [
+		{
+
+		}
+
+	],
+	"TC005_Verify_MemberAdded_EssentialComprehensivePlanWithAgent": [
+		{
+
+		}
+
+	],
+	"TC006_Verify_MemberAdded_ComprehensivePlanWithAgent": [
+		{
+
+		}
+
+	],
+	"TC001_HealthCare_FacilityProviderRegistration": [
+		{
+
+		}
+	],
+	"TC002_SearchAndUpdateRegisteredHealthCare_Facility": [
+		{
+
+		}
+	],
+	"TC003_AddBranchHealthCare_Facility": [
+		{
+
+		}
+	],
+	"TC004_AddProvidersHealthCare_Facility": [
+		{
+
+		}
+	],
+	"TC005_AddSubscribePlanHealthCare_Facility": [
+		{
+
+		}
+	],
+	"TC006_UploadExhibitDoc_PlanHealthCare_Facility": [
+		{
+
+		}
+	],
+	"TC007_AddedElectronicRemittanceDetails": [
+		{
+
+		}
+	],
+	"TC008_AddMPPPayments": [
+		{
+
+		}
+	],
+	"TC009_AddDocuments": [
+		{
+
+		}
+	],
+	"TC010_MessageOrMailToFacilitator": [
+		{
+
+		}
+	],
+	"TC011_BusinessRegistrationWithAdmin": [
+		{
+
+		}
+	],
+    "TC012_BusinessDetailsUpdateWithAdmin": [
+		{
+
+		}
+	],
+	"TC013_PaymentSetupInBusinessWithAdmin": [
+		{
+
+		}
+	],
+	"TC014_AddEmployeeInBusinessWithAdmin": [
+		{
+
+		}
+	],
+	"TC015_NewMemberInviteWithAdmin": [
+		{
+
+		}
+	],
+	"TC016_CreateLabOrderWithAdmin": [
+		{
+
+		}
+	],
+	"TC017_UpdateLabOrderWithAdmin": [
+		{
+
+		}
+	],
+	"TC018_CheckValidationCollection_DateLabOrder": [
+		{
+
+		}
+	],
+	"TC019_AddMemeberThroughAdmin": [
+		{
+
+		}
+	],
+	"TC019_AddUserWithAdmin": [
+		{
+
+		}
+	],
+	"TC020_AddGroupWithAdmin": [
+		{
+
+		}
+	],
+	"TC021_AddGroupCreationWithAdmin": [
+		{
+
+		}
+	],
+	"TC022_CheckValidationForGroupCreationWithAdmin": [
+		{
+
+		}
+	],
+	"TC023_ChargeCardWithAdmin": [
+		{
+
+		}
+	],
+	"TC024_AddNewCardWithAdmin":[
+		{
+
+		}
+	],
+	"TC025_RxSetUpForPharmacyWithAdmin":[
+		{
+
+		}
+	],
+	"TC026_RxSetUpWithAdmin":[
+		{
+
+		}
+	],
+	"TC027_RxSetUpEditForPharmacyWithAdmin":[
+		{
+
+		}
+	],
+	"TC028_CheckVisits_PaymentDashboardWithAdmin":[
+		{
+
+		}
+	],
+	"TC029_MakeChangesToVisits_WithAdmin":[
+		{
+
+		}
+	],
+	"TC030_ToCheckMember_Eligibility":[
+		{
+
+		}
+	],
+	"TC031_BlackListMembers":[
+		{
+
+		}
+	],
+	"TC032_PlanDeactivatedProcess":[
+	{
+
+	}
+     ],
+	"TC033_CheckBlackListMembersValidation":[
+		{
+
+		}
+	],
+	"TC034_CheckPlanDeactivateOrNot":[
+		{
+
+		}
+	],
+	"TC035_CheckLabOrderVoidInvoicing":[
+		{
+
+		}
+	]
+}
+
+
+
+

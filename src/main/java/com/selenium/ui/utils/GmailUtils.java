@@ -277,29 +277,32 @@ public class GmailUtils {
         ).setApplicationName("Gmail API Fetch").build();
     }
 
-
     public static String extractPasswordFromTravelEmail(String emailBody) {
 
         if (emailBody == null || emailBody.trim().isEmpty()) {
             return null;
         }
 
-        // Clean HTML if needed
+        // Convert HTML → plain text
         String text = Jsoup.parse(emailBody).text();
 
-        // Match pattern: Your password is XYZ123
-        Pattern pattern = Pattern.compile(
-                "Your password is\\s+(\\S+)",
-                Pattern.CASE_INSENSITIVE
-        );
+        // Regex patterns that match different possible email formats
+        String[] regexList = {
+                "temporary password is\\s*(\\S+)",
+                "Your temporary password is\\s*(\\S+)",
+                "Your password is\\s*(\\S+)",
+                "Password[:\\s]+(\\S+)"
+        };
 
-        Matcher matcher = pattern.matcher(text);
-
-        if (matcher.find()) {
-            return matcher.group(1); // returns only password
+        // Loop through patterns and return first match
+        for (String regex : regexList) {
+            Matcher matcher = Pattern.compile(regex, Pattern.CASE_INSENSITIVE).matcher(text);
+            if (matcher.find()) {
+                return matcher.group(1).trim();  // return password
+            }
         }
 
-        return null;
+        return null;  // <-- Your missing part
     }
 
 

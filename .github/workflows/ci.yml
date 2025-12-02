@@ -1,24 +1,37 @@
 name: Run Selenium TestNG Tests
+
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
+
+    # 🔐 Export Gmail Secrets for Java Code
+    env:
+      GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+      GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+      GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
+
       - name: Install dependencies
         run: mvn clean install -DskipTests
+
       - name: Run Tests
         run: mvn test
+
       - name: Upload Test Reports
         uses: actions/upload-artifact@v3
         with:

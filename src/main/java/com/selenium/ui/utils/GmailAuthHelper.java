@@ -19,7 +19,6 @@ public class GmailAuthHelper {
 
     static {
         try {
-            // 1️⃣ Try loading from Environment Variables (CI/CD)
             CLIENT_ID = System.getenv("GMAIL_CLIENT_ID");
             CLIENT_SECRET = System.getenv("GMAIL_CLIENT_SECRET");
             REFRESH_TOKEN = System.getenv("GMAIL_REFRESH_TOKEN");
@@ -53,8 +52,6 @@ public class GmailAuthHelper {
     }
 
     public static Credential getCredentials() throws Exception {
-
-        // Validation
         if (CLIENT_ID == null || CLIENT_ID.isEmpty())
             throw new IllegalStateException("CLIENT_ID missing or empty");
 

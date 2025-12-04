@@ -1,6 +1,5 @@
 package com.selenium.ui.browser;
 
-import com.selenium.ui.helper.ResourceHelper;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,82 +8,86 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
-import java.util.HashMap;
-
-
 public enum DriverType implements DriverSetup {
-	
+
 	CHROME {
+		@Override
 		public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-			System.setProperty("webdriver.chrome.driver", ResourceHelper.getResourceHelper("/src/main/resources/chromedriver"));
-			System.setProperty("webdriver.chrome.silentOutput", "true");
-			HashMap<String, Object> chromePreferences = new HashMap<>();
-			chromePreferences.put("profile.password_manager_enabled", false);
+
+			boolean isCI = System.getenv("CI") != null;   // TRUE on GitHub Actions
+
+			WebDriverManager.chromedriver().setup();
+
 			ChromeOptions options = new ChromeOptions();
 			options.merge(capabilities);
 			options.addArguments("--remote-allow-origins=*");
-			options.addArguments("--profile-directory=Profile 1");
-			options.addArguments("user-data-dir=C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data");
-			options.addArguments("--no-default-browser-check");
-			options.addArguments("--silent");
-			options.addArguments("--start-maximized");
-			options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-			options.addArguments("--no-sandbox"); // Bypass OS security model
-			options.setExperimentalOption("prefs", chromePreferences);
+
+			if (isCI) {
+				// ----------------------------
+				// RUNS ON GITHUB ACTIONS LINUX
+				// ----------------------------
+				options.addArguments("--headless=new");
+				options.addArguments("--disable-gpu");
+				options.addArguments("--no-sandbox");
+				options.addArguments("--disable-dev-shm-usage");
+				options.addArguments("--disable-extensions");
+				options.addArguments("--window-size=1920,1080");
+
+			} else {
+				// ----------------------------
+				// RUNS ON LOCAL WINDOWS MACHINE
+				// ----------------------------
+				options.addArguments("--start-maximized");
+
+				// Only use Windows profile when running locally
+				options.addArguments("user-data-dir=C:\\Users\\ADMIN\\AppData\\Local\\Google\\Chrome\\User Data");
+				options.addArguments("--profile-directory=Profile 1");
+			}
 
 			return new ChromeDriver(options);
 		}
 	},
-	
+
 	FIREFOX {
+		@Override
 		public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+
+			boolean isCI = System.getenv("CI") != null;
+
+			WebDriverManager.firefoxdriver().setup();
 			FirefoxOptions options = new FirefoxOptions();
 			options.merge(capabilities);
-			options.setHeadless(HEADLESS);
+
+			if (isCI) {
+				options.setHeadless(true);
+			}
+
 			return new FirefoxDriver(options);
 		}
-		
-	},
-	
-	SAFARI {
-		public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
-	},
-	
-	API {
-		public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-			return null;
-		}
-		
 	},
 
 	WEBDRIVERMANAGERCHROME {
+		@Override
 		public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
+
+			boolean isCI = System.getenv("CI") != null;
+
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
-			options.addArguments("--no-default-browser-check");
-			options.addArguments("--silent");
-			options.addArguments("--start-maximized");
 			options.addArguments("--remote-allow-origins=*");
-			options.addArguments("--disable-extensions");
-			options.addArguments("--no-sandbox");
+
+			if (isCI) {
+				options.addArguments("--headless=new");
+				options.addArguments("--disable-gpu");
+				options.addArguments("--no-sandbox");
+				options.addArguments("--disable-dev-shm-usage");
+				options.addArguments("--disable-extensions");
+				options.addArguments("--window-size=1920,1080");
+			} else {
+				options.addArguments("--start-maximized");
+			}
+
 			return new ChromeDriver(options);
 		}
-	},
-
-	WEBDRIVERMANAGERFIREFOX {
-		public RemoteWebDriver getWebDriverObject(DesiredCapabilities capabilities) {
-			WebDriverManager.firefoxdriver().setup();
-			FirefoxOptions options = new FirefoxOptions();
-			options.addArguments();
-			return new FirefoxDriver();
-		}
-	};
-	
-
-public final static boolean HEADLESS = Boolean.getBoolean("headless");
-
+	}
 }

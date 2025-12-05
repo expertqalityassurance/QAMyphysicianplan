@@ -133,7 +133,7 @@ public class MemberRegistrationMyPhysicianPlanTest extends TestBase {
         new RegisterPageUSEmployers().selectEmployerRegistration();
         new RegisterPageUSEmployers().EmployersRegistration();
         new LoginPage().launchApplication();
-        new RegisterPageUSEmployers().LoginWithCredentialsFromEmail();
+        new RegisterPageUSEmployers().LoginWithCredentialExcelFromEmail();
     }
 
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify the plan for US employers with Employer Registration for Business.", priority = 21)
@@ -141,7 +141,7 @@ public class MemberRegistrationMyPhysicianPlanTest extends TestBase {
         new LoginPage().launchApplication();
         new RegisterPageUSEmployers().BusinessEmployerRegistration();
         new LoginPage().launchApplication();
-        new RegisterPageUSEmployers().LoginWithCredentialsFromEmail();
+        new RegisterPageUSEmployers().LoginWithCredentialBusinessFromEmail();
     }
 
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify the plan Signup With Doctor.", priority = 22)
@@ -150,6 +150,7 @@ public class MemberRegistrationMyPhysicianPlanTest extends TestBase {
         new RegisterPlanSignupWithDr().RegisterPlanSignupWithDoctor();
         new RegisterPageUSEmployers().fillTravelerForm();
         new RegisterPageUSEmployers().enterMemberLoginCredentials();
+        new RegisterPageUSEmployers().SelectCheckBoxAuthentication();
         new RegisterPlanSignupWithDr().fillPaymentFormForDoctor();
     }
    @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify the plan for US employers with Employer Registration.", priority = 23)

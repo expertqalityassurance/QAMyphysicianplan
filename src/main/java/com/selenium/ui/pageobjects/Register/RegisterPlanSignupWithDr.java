@@ -70,8 +70,7 @@ public class RegisterPlanSignupWithDr extends BasePage {
         Random rand = new Random();
         int randomIndex = rand.nextInt(allPlans.size());
         WebElement randomPlan = allPlans.get(randomIndex);
-
-        // Click the radio button
+        Thread.sleep(10000);
         randomPlan.click();
         Thread.sleep(10000);
 

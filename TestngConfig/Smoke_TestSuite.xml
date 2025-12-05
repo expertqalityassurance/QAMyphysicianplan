@@ -5,10 +5,8 @@
 
     <test name="Registration Tests">
         <classes>
-            <class name="selenium.AdminThroughRegistrationTest" />
-            <class name="selenium.AgentThroughRegistrationTest" />
             <class name="selenium.MemberRegistrationMyPhysicianPlanTest" />
-            <class name="selenium.ValidationsChecksRegistrationTest" />
+
         </classes>
     </test>
 

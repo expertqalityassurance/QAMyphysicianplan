@@ -30,12 +30,12 @@ public class RegisterPageUSEmployers extends BasePage {
      By register = By.cssSelector("div.col-lg-12:nth-child(2) > a:nth-child(6)");
      By Appointment = By.cssSelector("div.col-lg-12:nth-child(2) > a:nth-child(9)");
      By usEmployers = By.xpath("//*[@id='headingEmployers']/h4/a");
-     By selectFlexibleUSCare = By.xpath("//*[@id='collapseEmployers']/div/div/div[1]/a/div/div/div/button");
+     By selectFlexibleUSCare = By.xpath("//*[@id='collapseEmployers']/div/div/div[2]/a/div/div/div/button");
      By routineMedicalCare = By.xpath("//*[@id='collapseEmployers']/div/div/div[2]/a/div/div/div/button");
      By EmpRegistration = By.xpath("//*[@id='collapseEmployers']/div/div/div[1]/a/div/div/div/button");
      By memberPlan = By.xpath("//*[@id='gridDefaultPlans']/div[2]/table/tbody/tr[1]/td[1]/input");
-     By SelectPlan = By.xpath("//*[@id=\"gridDefaultPlans\"]/div[2]/table/tbody/tr[1]/td[1]/input");
-     By nextButtonMemberPlan = By.xpath("//*[@id=\"tabstrip-1\"]/footer/button");
+     By SelectPlan = By.xpath("//*[@id='gridDefaultPlans']/div[2]/table/tbody/tr[1]/td[1]/input");
+     By nextButtonMemberPlan = By.xpath("//*[@id='tabstrip-1']/div/footer/button");
      By Next_Btn = By.xpath("//*[@id='tabstrip-1']/div/footer/button");
      By nextSaveButtonMemberPlan = By.xpath("//*[@id='tabstrip-1']/footer/button");
      By firstName = By.xpath("//input[@id='FirstName']");
@@ -56,9 +56,12 @@ public class RegisterPageUSEmployers extends BasePage {
      By makePayment = By.xpath("//*[@id='tabstrip-3']/div/footer/button[2]");
      By date = By.xpath("//*[@id='divCarddetails']/div[4]/div[1]/span[3]");
      By dateSelect = By.xpath("//*[@id='YY_listbox']/li[2]");
+     By Scroll = By.xpath("/html");
 
      By password = By.xpath("//input[@id='Password']");
      By confirmPassword = By.xpath("//input[@id='ConfirmPassword']");
+    By ButtonNext = By.xpath("//*[@id=\"tabstrip-2\"]/footer/button[2]");
+    By StartBTN = By.xpath("//*[@id='tabstrip-1']/footer/button");
      By BusinessName = By.xpath("//*[@id='OrganizationName']");
     By Address = By.xpath("//*[@id='Address']");
     By StateName = By.xpath("//*[@id='StateName']");
@@ -67,7 +70,7 @@ public class RegisterPageUSEmployers extends BasePage {
     By CountryCode = By.xpath("//*[@id='CountryCode']");
     By PhoneNumber = By.xpath("//*[@id='PhoneNumber']");
     By CityName = By.xpath("//*[@id='CityName']");
-    By NextButton = By.xpath("//*[@id='tabstrip-2']/footer/button[2]");
+    By NextButton = By.xpath("//*[@id='tabstrip-3']/footer/button[2]");
     By selectLocation= By.xpath("//*[@id='contactPanelBar']/li/ul/li/div/div[1]/div[1]/span[1]/span/span[1]");
     By OptionSelect = By.xpath("//div[@class='k-animation-container']//ul/li[@class='k-item' and text()='Main']");
     By ContactName = By.xpath("//*[@id='contactPanelBar']/li/ul/li/div/div[2]/div[1]/input");
@@ -78,15 +81,15 @@ public class RegisterPageUSEmployers extends BasePage {
     By Role =By.xpath("//*[@id='contactPanelBar']/li/ul/li/div/div[1]/div[2]/span[1]/span/span[1]");
     By SelectOption = By.xpath ("//div[@class='k-animation-container']//ul/li[@class='k-item' and text()='Admin']");
     By actionSelect= By.xpath("//*[@class='k-item']");
-    By SaveButton = By.xpath("//*[@id='tabstrip-3']/footer/button[2]");
+    By SaveButton = By.xpath("//*[@id='tabstrip-4']/footer/button[2]");
     By CheckBoxSelect = By.xpath("//*[@id='gridEmployerPlans']/div[2]/table/tbody/tr[1]/td[1]/input");
     By Contribution =By.xpath("//*[@id='gridEmployerPlans']/div[2]/table/tbody/tr[1]/td[5]/input");
-    By save_nextbutton =By.xpath("//*[@id='tabstrip-4']/footer/button[2]");
+    By save_nextbutton =By.xpath("//*[@id='tabstrip-5']/footer/button[2]");
     By Filechoose = By.xpath("//input[@id=\"employeeExcel\"]");
-    By SelectDate = By.xpath("//*[@id='tabstrip-5']/div/fieldset/div[3]/div[1]/span[1]/span/span/span");
+    By SelectDate = By.xpath("//*[@id='tabstrip-6']/div/fieldset/div[3]/div[1]/span[1]/span/span");
     By SelectedDate =By.xpath("//*[@id='PlanStartDate']");
-    By UploadandValidate =By.xpath("//*[@id='tabstrip-5']/div/fieldset/div[3]/div[2]/button");
-    By SaveandNextButton= By.xpath("//*[@id='tabstrip-5']/footer/button[2]");
+    By UploadandValidate =By.xpath("//*[@id='tabstrip-6']/div/fieldset/div[3]/div[2]/button");
+    By SaveandNextButton= By.xpath("//*[@id='tabstrip-6']/footer/button[2]");
     By calendar_icon= By.xpath("//input[@placeholder='MM/DD/YYYY']/following-sibling::button");
     By next_btn = By.xpath("//a[@class='k-link k-nav-next']");
     By firstDateXpath = By.xpath("//table[contains(@class,'k-calendar')]//a[text()='1']");
@@ -94,11 +97,11 @@ public class RegisterPageUSEmployers extends BasePage {
     By CardNumber = By.xpath("//*[@id='CardNumber']");
     By CardName = By.xpath("//*[@id='NameOnCard']");
     By CvvField = By.xpath("//*[@id='CVV']");
-    By cardExpiryDropdown = By.xpath("//*[@id=\"tabstrip-6\"]/div/fieldset/div[8]/div[1]/span[2]/span");
-    By SelectExpiryDropdown = By.xpath("//*[@id='MM_listbox']/li[2]");
-    By expiryYearOption = By.xpath("//*[@id='tabstrip-6']/div/fieldset/div[8]/div[1]/span[3]/span");
+    By cardExpiryDropdown = By.xpath("//*[@id='tabstrip-7']/div/fieldset/div[8]/div[1]/span[2]/span/span[1]");
+    By SelectExpiryDropdown = By.xpath("//*[@id='tabstrip-7']/div/fieldset/div[8]/div[1]/span[3]/span/span[1]");
+    By expiryYearOption = By.xpath("//*[@id=\"YY_listbox\"]/li[6]");
     By SelectexpiryYearOption = By.xpath("//*[@id='YY_listbox']/li[6]");
-    By CompleteRegistration = By.xpath("//*[@id='tabstrip-6']/footer/button[2]");
+    By CompleteRegistration = By.xpath("//*[@id='tabstrip-7']/footer/button[2]");
     By SearchZip = By.xpath("//*[@id='SearchZip']");
     By Next_BTN = By.cssSelector("button.button_blue:nth-child(5)");
     By SelectCheckBox = By.xpath("//*[@id='AnyProvider']");
@@ -118,6 +121,8 @@ public class RegisterPageUSEmployers extends BasePage {
     By NewPassword = By.xpath("//input[@id='NewPassword']");
     By ConfirmPassword = By.xpath("//input[@id='ConfirmPassword']");
     By BTNSubmit = By.xpath("//*[@id='setPasswordModal']/div[2]/div[2]/div[3]/button");
+    By CheckBoxAuthentication = By.xpath("//*[@id='chk2factor']");
+    By NextBTN = By.xpath("//*[@id='tabstrip-2']/footer/button[2]");
 
 
 
@@ -198,6 +203,13 @@ public class RegisterPageUSEmployers extends BasePage {
         enterValue(password, "Tester@1", "Password");
         enterValue(confirmPassword, "Tester@1", "Confirm password");
         Thread.sleep(1000);
+        click(ButtonNext,"");
+        Thread.sleep(1000);
+    }
+
+    public void SelectCheckBoxAuthentication () throws InterruptedException {
+       click(CheckBoxAuthentication,"");
+       click(NextBTN,"");
     }
 
 
@@ -222,6 +234,7 @@ public class RegisterPageUSEmployers extends BasePage {
         clickUSEmployers();
         selectFlexibleUSCarePlan();
         click(memberPlan, "Select member Plan");
+        scrollDowns(Scroll,200);
         clickNextMemberPlan();
         Thread.sleep(10000);
         fillTravelerForm();
@@ -244,6 +257,7 @@ public class RegisterPageUSEmployers extends BasePage {
         clickRegister();
         clickUSEmployers();
         selectEmployerRegistration();
+        click(StartBTN,"Click on Start Button");
         enterValue(BusinessName, CreatedDummyName(), "BusinessName Enter successfully");
         enterValue(Address, generateRandomAddressInCalifornia(), "BusinessName Enter successfully");
         enterValue(CityName, generateRandomCityInCalifornia(), "BusinessName Enter successfully");
@@ -258,15 +272,8 @@ public class RegisterPageUSEmployers extends BasePage {
         click(NextButton,"Click On Next Button");
         click(selectLocation,"Select Location From Dropdown");
         Thread.sleep(1000);
-        click(OptionSelect,"Select Location Option");
-        click(Role,"Select Role");
-        Thread.sleep(1000);
-        click(SelectOption,"Select Role Option");
         enterValue(ContactName,CreatedDummyName(),"Entered ContactName ");
         enterValue(ContactTitle,CreatedDummyName(),"Entered ContactTitle");
-        enterValue(ContactEmail,CreatedDummyEmail(),"Entered ContactEmail");
-        enterValue(Contact_PhoneCode,"310","Entered Contact_PhoneCode");
-        enterValue(Contact_Phone,CreatedPhoneNumber(),"Entered Contact Number");
         click(SaveButton,"Click On Save Button");
         click(CheckBoxSelect,"Select CheckBox For Plan");
         enterValue(Contribution,"10","Entered Contribution");
@@ -303,7 +310,7 @@ public class RegisterPageUSEmployers extends BasePage {
             wait.until(ExpectedConditions.elementToBeClickable(freshFirstDate));
             ((JavascriptExecutor) driver).executeScript("arguments[0].click();", freshFirstDate);
         }
-        WebDriverWait explicit_wait = new WebDriverWait(driver,Duration.ofSeconds(30));
+        WebDriverWait explicit_wait = new WebDriverWait(driver,Duration.ofSeconds(40));
         explicit_wait.until(ExpectedConditions.elementToBeClickable(UploadandValidate));
         click(UploadandValidate,"Click On Upload and validate Button");
         Thread.sleep(10000);
@@ -315,7 +322,6 @@ public class RegisterPageUSEmployers extends BasePage {
         click(SelectExpiryDropdown,"Open ExpiryDate Dropdown ");
         click(expiryYearOption,"Selected Expiry Date Dropdown");
         Thread.sleep(1000);
-        click(SelectexpiryYearOption,"Selected Expiry Year Dropdown");
         enterValue(CvvField, "123", "Entered CVV");
         click(CompleteRegistration, "Completed Employee Registration");
         Thread.sleep(10000);
@@ -323,6 +329,7 @@ public class RegisterPageUSEmployers extends BasePage {
     }
 
     public void EmployersRegistration() throws Exception {
+        click(StartBTN,"Click on Start Button");
         enterValue(BusinessName, CreatedDummyName(), "BusinessName Enter successfully");
         enterValue(Address, generateRandomAddressInCalifornia(), "BusinessName Enter successfully");
         enterValue(CityName, generateRandomCityInCalifornia(), "BusinessName Enter successfully");
@@ -337,21 +344,18 @@ public class RegisterPageUSEmployers extends BasePage {
         click(NextButton,"Click On Next Button");
         click(selectLocation,"Select Location From Dropdown");
         Thread.sleep(1000);
-        click(OptionSelect,"Select Location Option");
-        click(Role,"Select Role");
-        Thread.sleep(1000);
-        click(SelectOption,"Select Role Option");
         enterValue(ContactName,CreatedDummyName(),"Entered ContactName ");
         enterValue(ContactTitle,CreatedDummyName(),"Entered ContactTitle");
-        enterValue(ContactEmail,CreatedDummyEmail(),"Entered ContactEmail");
-        enterValue(Contact_PhoneCode,"310","Entered Contact_PhoneCode");
-        enterValue(Contact_Phone,CreatedPhoneNumber(),"Entered Contact Number");
+        //enterValue(ContactEmail,CreatedDummyEmail(),"Entered ContactEmail");
+        //enterValue(Contact_PhoneCode,"310","Entered Contact_PhoneCode");
+        //enterValue(Contact_Phone,CreatedPhoneNumber(),"Entered Contact Number");
         click(SaveButton,"Click On Save Button");
         click(CheckBoxSelect,"Select CheckBox For Plan");
         enterValue(Contribution,"10","Entered Contribution");
         click(save_nextbutton,"Click on Save and Next");
         Thread.sleep(1000);
         String updatedEmail = UpdateExcelEmail.updateEmailInExcel();
+        ExcelEmail=updatedEmail;
         System.out.println("Excel updated with email: " + updatedEmail);
         By Filechoose = By.xpath("//input[@type=\"file\"]");
         String projectPath = System.getProperty("user.dir");
@@ -394,7 +398,6 @@ public class RegisterPageUSEmployers extends BasePage {
         click(SelectExpiryDropdown,"Open ExpiryDate Dropdown ");
         click(expiryYearOption,"Selected Expiry Date Dropdown");
         Thread.sleep(1000);
-        click(SelectexpiryYearOption,"Selected Expiry Year Dropdown");
         enterValue(CvvField, "123", "Entered CVV");
         click(CompleteRegistration, "Completed Employee Registration");
         Thread.sleep(100000);
@@ -571,7 +574,31 @@ public class RegisterPageUSEmployers extends BasePage {
         System.out.println("Password = " + pwd);
     }
 
+    public void LoginWithCredentialExcelFromEmail() throws InterruptedException {
+        enterValue(Username, ExcelEmail, "Username Field");
+        Thread.sleep(10000);
+        enterValue(Password,extractedPassword, "Password Field");
+        click(BTN_login, "Click on Login");
+        Thread.sleep(10000);
+        enterValue(NewPassword, "Tester@1", "");
+        enterValue(ConfirmPassword, "Tester@1", "");
+        Thread.sleep(10000);
+        click(BTNSubmit, "");
+        Thread.sleep(10000);
+    }
 
+    public void LoginWithCredentialBusinessFromEmail() throws InterruptedException {
+        enterValue(Username, Emailactual, "Username Field");
+        Thread.sleep(10000);
+        enterValue(Password, extractedPassword, "Password Field");
+        click(BTN_login, "Click on Login");
+        Thread.sleep(10000);
+        enterValue(NewPassword, "Tester@1", "");
+        enterValue(ConfirmPassword, "Tester@1", "");
+        Thread.sleep(10000);
+        click(BTNSubmit, "");
+        Thread.sleep(10000);
+    }
 
     public void LoginWithCredentialsFromEmail() throws InterruptedException {
         enterValue(Username, MemberEmail, "Username Field");

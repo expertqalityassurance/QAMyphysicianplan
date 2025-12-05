@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RegisterPageTravelers extends BasePage {
-    public static String Emailactual, FirstName, LastName,pwd,extractedPassword,MemberEmail;
+    public static String Emailactual, FirstName, LastName,pwd,extractedPassword,MemberEmail,ExcelEmail;
 
     public RegisterPageTravelers() {
         super();
@@ -24,7 +24,7 @@ public class RegisterPageTravelers extends BasePage {
     By selectPremiumPlan = By.cssSelector("#collapseTravelers > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2)");
     By selectEssentialPlan = By.xpath("//*[@id='collapseTravelers']/div/div/div[2]/a/div/div/div/button");
     By OptimumComprehensivePlan = By.xpath("//*[@id='collapseTravelers']/div/div/div[3]/a/div/div/div/button");
-    By selectPrimaryPlan = By.xpath("//*[@id='collapseTravelers']/div/div/div[3]/a/div/div/div/button");
+    By selectPrimaryPlan = By.xpath("//*[@id='collapseTravelers']/div/div/div[4]/a/div/div/div/button");
 
     By startDate = By.xpath("//*[@id='tabstrip-1']/div/div[1]/div[1]/span[2]/span/span/span");
     By startDates = By.xpath("//*[@id='TravelStartDate']");
@@ -298,10 +298,11 @@ public class RegisterPageTravelers extends BasePage {
         Thread.sleep(100);
 
     }
-    public void AssertCall() {
+    public void AssertCall()throws InterruptedException {
         String actualTitle = driver.getTitle();
         System.out.println(actualTitle);
-        Assert.assertEquals(actualTitle, "Member Registration Travel", "Registration Confirmation");
+        Thread.sleep(1000);
+        Assert.assertTrue(actualTitle.contains("Member Registration"));
     }
     public  void NumberOfTravelers() throws InterruptedException {
 

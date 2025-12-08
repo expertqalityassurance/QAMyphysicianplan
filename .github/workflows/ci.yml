@@ -35,17 +35,31 @@ jobs:
           google-chrome --version
           chromedriver --version
 
-      # Build the project
+      # Build project
       - name: Install dependencies
         run: mvn clean install -DskipTests
 
-      # ✅ Run ONLY your specific TestNG Suite
+      # Run ONLY your specific TestNG suite
       - name: Run Tests
         run: mvn clean test -DsuiteXmlFile=TestngConfig/Smoke_TestSuite.xml
 
-      # Upload reports
-      - name: Upload Test Reports
+      # Upload Surefire TestNG XML reports
+      - name: Upload TestNG Results
         uses: actions/upload-artifact@v4
         with:
-          name: reports
+          name: surefire-reports
           path: target/surefire-reports
+
+      # Upload Extent HTML Report (Your automation report)
+      - name: Upload Extent HTML Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: extent-report
+          path: test-output/ExtentReport
+
+      # Upload Screenshots folder
+      - name: Upload Screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: test-output/Screenshots

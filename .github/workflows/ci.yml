@@ -2,9 +2,9 @@ name: Run Selenium TestNG Tests
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   test:
@@ -26,7 +26,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
 
-      # Install Chrome + ChromeDriver (Ubuntu runner needs this)
+      # Install Chrome + ChromeDriver
       - name: Install Chrome and ChromeDriver
         uses: browser-actions/setup-chrome@v1
 
@@ -39,9 +39,9 @@ jobs:
       - name: Install dependencies
         run: mvn clean install -DskipTests
 
-      # Run TestNG Tests
+      # ✅ Run ONLY your specific TestNG Suite
       - name: Run Tests
-        run: mvn test
+        run: mvn clean test -DsuiteXmlFile=TestingConfig/Smoke_TestSuite.xml
 
       # Upload reports
       - name: Upload Test Reports

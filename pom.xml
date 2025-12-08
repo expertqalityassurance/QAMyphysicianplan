@@ -25,7 +25,7 @@
         <applicationurl>https://www.google.com</applicationurl>
         <envi>staging</envi>
         <overwrite.binaries>false</overwrite.binaries>
-        <suiteXmlFile>TestngConfig/Smoke_TestSuite.xml</suiteXmlFile>
+        <suiteXmlFile>./TestingConfig/Smoke_TestSuite.xml</suiteXmlFile>
     </properties>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->

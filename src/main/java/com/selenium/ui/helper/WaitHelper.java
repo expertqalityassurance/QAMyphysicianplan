@@ -20,8 +20,6 @@ import static org.hamcrest.Matchers.is;
 public class WaitHelper {
 
 	private Logger logger = LoggerHelper.getLogger(this.getClass());
-
-
 	/**
 	 * Global function to set implicit wait
 	 *
@@ -179,7 +177,7 @@ public class WaitHelper {
 	 * @param textToMatch
 	 */
 	public void waitUntilTitleMatches(WebDriver driver, String textToMatch) {
-		await().atMost(10, TimeUnit.SECONDS).ignoreException(StaleElementReferenceException.class)
+		await().atMost(10, SECONDS).ignoreException(StaleElementReferenceException.class)
 				.until(pageTitleMatches(driver,textToMatch));
 	}
 	/**
@@ -197,7 +195,7 @@ public class WaitHelper {
 	 */
 	public void isDisplayedUsingAwait(WebDriver driver, By locator) {
 		Reporter.log("Waiting for "+locator.toString()+" using await");
-		await().atMost(40,SECONDS).pollInterval(2, TimeUnit.SECONDS)
+		await().atMost(40,SECONDS).pollInterval(2, SECONDS)
 				.ignoreException(StaleElementReferenceException.class)
 				.ignoreException(IllegalStateException.class)
 				.until(isDisplayed(driver,locator));
@@ -210,7 +208,7 @@ public class WaitHelper {
 	 * @param locator
 	 */
 	public void isNotDisplayedUsingAwait(WebDriver driver, By locator) {
-		await().atMost(1,MINUTES).pollInterval(1, TimeUnit.SECONDS)
+		await().atMost(1,MINUTES).pollInterval(1, SECONDS)
 				.ignoreException(StaleElementReferenceException.class).
 				until(isNotDisplayed(driver,locator), is(false));
 	}

@@ -41,7 +41,7 @@ jobs:
 
       # ✅ Run ONLY your specific TestNG Suite
       - name: Run Tests
-        run: mvn clean test -DsuiteXmlFile=TestingConfig/Smoke_TestSuite.xml
+        run: mvn clean test -DsuiteXmlFile=TestngConfig/Smoke_TestSuite.xml
 
       # Upload reports
       - name: Upload Test Reports

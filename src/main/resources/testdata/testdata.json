@@ -23,39 +23,39 @@
 		{
 		}
 	],
-	"TC007_FlexibleUSCare": [
+	"TC007_PrimaryCareInternational_StudentPlan": [
 		{
 		}
 	],
-	"TC008_RoutineMedicalCare": [
+	"TC008_USLocalWithUSCarePlan":[
 		{
 		}
 	],
-	"TC009_PeopleFlexibleUSCare": [
+	"TC009_USLocalWithUSCareOptimumPlan": [
 		{
 		}
 	],
-	"TC010_PeopleRoutineMedicalCare": [
+	"TC010_USLocalWithUSCareOptimumPlan": [
 		{
 		}
 	],
-	"TC011_RegistrationNeuronPlan": [
+	"TC011_USLocalWithUSCarePremiumPlan": [
 		{
 		}
 	],
-	"TC012_RegistrationWithMultiMembers": [
+	"TC012_USLocalWithPrimaryCarePlan": [
 		{
 		}
 	],
-	"TC013_RegistrationWithPreExistingMembers": [
+	"TC013_RegistrationWithMultiMembers": [
 		{
 		}
 	],
-	"TC014_Login": [
+	"TC014_RegistrationWithPreExistingMembers": [
 		{
 		}
 	],
-	"TC015_EmployerRegistration": [
+	"TC015_Login": [
 		{
 		}
 	],
@@ -75,23 +75,23 @@
 		{
 		}
 	],
-	"TC020_EmployerRegistrationWithCheckEmployeeLogin": [
+	"TC020_PlanSignupWithDoctor": [
 		{
 		}
 	],
-	"TC021_EmployerRegistrationWithCheckBusinessLogin": [
+	"TC021_AmountDueCheckOfPlanWithDoctor": [
 		{
 		}
 	],
-	"TC022_PlanSignupWithDoctor": [
+	"TC022_EmployerRegistration": [
 		{
 		}
 	],
-	"TC023_AmountDueCheckOfPlanWithDoctor": [
+	"TC023_EmployerRegistrationWithCheckEmployeeLogin": [
 		{
 		}
 	],
-	"TC024_RegistrationWithFlexible_US_CarePage": [
+	"TC024_EmployerRegistrationWithCheckBusinessLogin": [
 		{
 		}
 	],
@@ -99,11 +99,15 @@
 		{
 		}
 	],
-	"TC026_AddCoverage_to_preexisting_conditionsPolicyMax": [
+	"TC026_RegistrationWithFlexible_US_CarePage": [
 		{
 		}
 	],
-	"TC027_ToCheckPolicyMax_DueAmountWithTravelerCount": [
+	"TC027_AddCoverage_to_preexisting_conditionsPolicyMax": [
+		{
+		}
+	],
+	"TC028_ToCheckPolicyMax_DueAmountWithTravelerCount": [
 		{
 		}
 	],

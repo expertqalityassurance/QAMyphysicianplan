@@ -1,18 +1,24 @@
 package com.selenium.ui.pageobjects.Register;
 
 import com.selenium.ui.pageobjects.common.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
+import static io.reactivex.rxjava3.internal.util.NotificationLite.getValue;
+
 public class RegisterPageTravelers extends BasePage {
-    public static String Emailactual, FirstName, LastName,pwd,extractedPassword,MemberEmail,ExcelEmail;
+    public static String Emailactual, FirstName, LastName,pwd,extractedPassword,MemberEmail,ExcelEmail,policyMaxAmountText2;;
 
     public RegisterPageTravelers() {
         super();
@@ -20,10 +26,19 @@ public class RegisterPageTravelers extends BasePage {
 
     By actionSelect = By.xpath("//ul[@id='StateName_listbox']/li");
     By register = By.cssSelector("div.col-lg-12:nth-child(2) > a:nth-child(6)");
-    By travelers = By.cssSelector("#headingTravelers > h4:nth-child(1) > a:nth-child(1)");
+    By travelers = By.xpath("//*[@id='headingTravelers']/h4/a");
     By selectPremiumPlan = By.cssSelector("#collapseTravelers > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2)");
-    By selectEssentialPlan = By.xpath("//*[@id='collapseTravelers']/div/div/div[2]/a/div/div/div/button");
-    By OptimumComprehensivePlan = By.xpath("//*[@id='collapseTravelers']/div/div/div[3]/a/div/div/div/button");
+    By selectEssentialPlan = By.xpath("//*[@id='planSelection']/div[2]/label/input");
+    By OptimumComprehensivePlan = By.xpath("//*[@id='planSelection']/div[3]/label/input");
+    By PrimaryCarePlan = By.xpath("//*[@id='planSelection']/div[4]/label/input");
+    By PrimaryCareStudentPlan = By.xpath("//*[@id='planSelection']/div[3]/label/input");
+    By USCareOptimumPlan = By.xpath("//*[@id='planSelection']/div[2]/label/input");
+    By USCarePlusPlan = By.xpath("//*[@id='planSelection']/div[3]/label/input");
+    By USCarePremiumPlan = By.xpath("//*[@id='planSelection']/div[4]/label/input");
+    By USPrimaryCarePlan = By.xpath("//*[@id='planSelection']/div[5]/label/input");
+    By AddTraveler = By.xpath("//*[@id='tabstrip-1']/div/div[2]/div/a");
+    By InternationalStudent = By.xpath("//*[@id='MemberType_listbox']/li[3]");
+    By USLocal = By.xpath("//*[@id='MemberType_listbox']/li[4]");
     By selectPrimaryPlan = By.xpath("//*[@id='collapseTravelers']/div/div/div[4]/a/div/div/div/button");
 
     By startDate = By.xpath("//*[@id='tabstrip-1']/div/div[1]/div[1]/span[2]/span/span/span");
@@ -34,20 +49,21 @@ public class RegisterPageTravelers extends BasePage {
     By zipCode = By.xpath("//*[@name='USZip']");
     By getQuote = By.xpath("//button[text()='Get Quote']");
     By NoOfTravelers = By.xpath("//*[@id='MemberCount']");
-    By next = By.xpath("//*[@id='btnPlanNext']");
+    By next = By.xpath("(//button[@onclick='OnDatesNext()'])[1]");
 
     By firstName = By.xpath("//input[@id='firstName1']");
     By lastName = By.xpath("//*[@id='lastName1']");
     By dateOfBirth = By.xpath("//*[@id='DOB1']");
     By address = By.xpath("//*[@id='Address']");
     By city = By.xpath("//*[@id='CityName']");
-    By state = By.xpath("//*[@id='divMembers']/div[2]/div[2]/span[2]/span/span[1]");
+    By state = By.xpath("//span[@class='k-input'][normalize-space()='select']");
+    By SelectState = By.xpath("//*[@id='StateName_listbox']/li[2]");
     By postalCode = By.xpath("//*[@id='Zip']");
     By emailUsername = By.xpath("//*[@id='Email']");
     By mobileCode = By.xpath("//*[@id='CountryCode']");
     By mobileNumber = By.xpath("//*[@id='MobileNumber']");
 
-    By nextButtonComprehensive = By.xpath("//*[@id='divMembers']/footer/button[2]");
+    By nextButtonComprehensive = By.xpath("(//button[@onclick='OnMemberNextClick()'])[1]");
     By nextButtonMember = By.xpath("//*[@id='tabstrip-2']/footer/button[2]");
     By nextButtonMemberPlan = By.xpath("//*[@id='tabstrip-1']/div/footer/button");
 
@@ -56,14 +72,17 @@ public class RegisterPageTravelers extends BasePage {
     By cvv = By.xpath("//*[@id='CVV']");
     By chkTerms = By.xpath("//*[@id='chkTerms']");
     By makePayment = By.xpath("//*[@id='tabstrip-4']/div/footer/button[2]");
-    By date = By.xpath("//*[@id='divcarddetails']/div[2]/div[1]/span[3]/span");
+    By date = By.xpath("//*[@id='divCarddetails']/div[4]/div[1]/span[2]/span/span[1]");
 
-    By dateSelect = By.xpath("//*[@id='YY_listbox']/li[2]");
-
+    By dateSelect = By.xpath("//*[@id='MM_listbox']/li[4]");
+    By ClickYear = By.xpath("//*[@id='divCarddetails']/div[4]/div[1]/span[3]/span/span[1]");
+    By selectYear = By.xpath("//*[@id='YY_listbox']/li[2]");
     By comprehensivePlan = By.xpath("//*[@id='pivotTableEssential']/tbody/tr[1]/td[2]/label/span[1]");
     By memberPlan = By.xpath("//*[@id='gridDefaultPlans']/div[2]/table/tbody/tr[1]/td[1]/input");
     By password = By.xpath("//input[@id='Password']");
     By confirmPassword = By.xpath("//input[@id='ConfirmPassword']");
+    By TravelersNum = By.xpath("//*[@id='divRegister']/div[2]/div/div[2]/div/div[6]/span[2]");
+    By calendarWidgetBy = By.xpath("//div[contains(@class,'k-widget') and contains(@class,'k-calendar') and not(contains(@style,'display:none'))]");
 
     By firstNameMember = By.xpath("//input[@id='FirstName']");
     By lastNameMember = By.xpath("//*[@id='LastName']");
@@ -81,15 +100,19 @@ public class RegisterPageTravelers extends BasePage {
     By checkTermsMember = By.xpath("//*[@id='SecoundTime']");
     By makePaymentMember = By.xpath("//*[@id='tabstrip-3']/div/footer/button[2]");
 
-    By Policy_Max = By.xpath("//*[@id='pivotTable']/tbody/tr[1]/td[2]/label/span[2]");
+    By Policy_Max = By.xpath("//*[@id=\"quotePremium\"]");
     By BackBTN = By.xpath("//*[@id='tabstrip-2']/div/footer/button[1]");
     By notraveler = By.xpath("//*[@id='MemberCount']");
-    By Amount_Due = By.xpath("//*[@id='divRegister']/div[2]/div/div[3]/span[5]");
+    By Amount_Due = By.xpath("//*[@id=\"divRegister\"]/div[2]/div/div[2]/div/div[10]/span[2]");
     By chkPreExistingConditions = By.xpath("//*[@id='chkPreExistingConditions']");
-    By scroller = By.xpath("/html[@class='k-webkit k-webkit140 js ']");
-    By selectMakePaymentBtn = By.xpath("//*[@id='tabstrip-4']/div/footer/button[2]");
+    By scroller = By.xpath("//html");
+    By selectMakePaymentBtn = By.xpath("//*[@id=\"tabstrip-3\"]/div/footer/button[2]");
     By TravelerAge = By.xpath("//*[@id='ageContainer']/div/span/span/span[1]");
-    By SelectedTravelerAge = By.xpath("//*[@id='age1_listbox']/li[28]");
+    By MultiTraveler = By.xpath("//*[@id='ageContainer']/div[2]/span/span/span[1]");
+    By SelectedTravelerAge = By.xpath("//*[@id=\"age1_listbox\"]/li[28]");
+    By SelectedSecondTravelerAge = By.xpath("//*[@id='age2_listbox']/li[28]");
+    By SelectTravelerType = By.xpath("//*[@id='tabstrip-1']/div/div[3]/div/span[2]/span/span[1]");
+    By TravelerTypeOption = By.xpath("//*[@id='MemberType_listbox']/li[2]");
     By BlackButton = By.xpath("//*[@id='tabstrip-2']/div/footer/button[1]");
     By Username = By.xpath("//input[@id='UserName']");
     By Password = By.xpath("//*[@id='Password']");
@@ -103,8 +126,9 @@ public class RegisterPageTravelers extends BasePage {
         return this;
     }
 
-    public RegisterPageTravelers clickTravelers() {
+    public RegisterPageTravelers clickTravelers() throws InterruptedException {
         click(travelers, "Click on Travelers");
+        Thread.sleep(1000);
         return this;
     }
 
@@ -129,8 +153,49 @@ public class RegisterPageTravelers extends BasePage {
         return this;
     }
 
+    public RegisterPageTravelers selectPrimaryCarePlan() {
+        click(PrimaryCarePlan, "Click on Select Essential Plan For Travelers");
+        return this;
+    }
+
+
+    public RegisterPageTravelers selectPrimaryCareInternationalStudent() {
+        click(PrimaryCareStudentPlan, "Click on Select Essential Plan For Travelers");
+        return this;
+    }
+
+    public RegisterPageTravelers selectUSCareOptimumPlan() {
+        click(USCareOptimumPlan, "Click on Select Essential Plan For Travelers");
+        return this;
+    }
+
+    public RegisterPageTravelers selectUSCarePlusPlan() {
+        click(USCarePlusPlan, "Click on Select Essential Plan For Travelers");
+        return this;
+    }
+    public RegisterPageTravelers selectUSCarePremiumPlan() {
+        click(USCarePremiumPlan, "Click on Select Essential Plan For Travelers");
+        return this;
+    }
+
+    public RegisterPageTravelers selectPrimaryCarePlanWithUSLocal() {
+        click(USPrimaryCarePlan, "Click on Select Essential Plan For Travelers");
+        return this;
+    }
     public RegisterPageTravelers selectPrimaryCare() {
         click(selectPrimaryPlan, "Click on Select Primary Care Plan For Travelers");
+        return this;
+    }
+
+    public RegisterPageTravelers AddTraveler() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(Policy_Max));
+        policyMaxAmountText2 = element.getText();
+        click(AddTraveler, "Click on Select Essential Plan For Travelers");
+        click(MultiTraveler,"");
+        Thread.sleep(1000);
+        click(SelectedSecondTravelerAge, "");
+
         return this;
     }
 
@@ -150,6 +215,39 @@ public class RegisterPageTravelers extends BasePage {
         Thread.sleep(1000);
     }
 
+    public void fillPlanQuotesForm() throws InterruptedException {
+        click(startDate, "Click on Start Date");
+        enterValue(startDates, Keys.ENTER);
+
+        click(endDate, "Click on End Date");
+        enterValue(endDates, Keys.ARROW_DOWN);
+        enterValue(endDates, Keys.ENTER);
+    }
+
+    public void fillPlanQuotesFormWithFirstDate() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        // 1️⃣ Click the calendar icon
+        By calendarIcon = By.xpath("//input[@id='TravelStartDate']/following-sibling::span//span[contains(@class,'k-i-calendar')]");
+        wait.until(ExpectedConditions.elementToBeClickable(calendarIcon)).click();
+        // 2️⃣ Calendar popup container
+        By calendarWidgetBy = By.xpath("//div[contains(@class,'k-widget') and contains(@class,'k-calendar') and not(contains(@style,'display:none'))]");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(calendarWidgetBy));
+        // 3️⃣ Click "Next Month" arrow button
+        By nextMonthArrow = By.xpath("//div[contains(@class,'k-widget') and contains(@class,'k-calendar') and not(contains(@style,'display:none'))]//a[contains(@class,'k-nav-next')]");
+        wait.until(ExpectedConditions.elementToBeClickable(nextMonthArrow)).click();
+        // 4️⃣ Wait for the calendar to load next month
+        Thread.sleep(1000);
+        // 5️⃣ Select the first day (1)
+        By firstDay = By.xpath("//div[contains(@class,'k-widget') and contains(@class,'k-calendar') and not(contains(@style,'display:none'))]//table//a[normalize-space()='1' and not(contains(@class,'k-other-month'))]");
+        WebElement firstDate = wait.until(ExpectedConditions.elementToBeClickable(firstDay));
+        try {
+            firstDate.click();
+        } catch (ElementClickInterceptedException e) {
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", firstDate);
+        }
+        System.out.println("✅ Selected the first day of next month successfully.");
+    }
+
     public void SelectGetQuote() throws InterruptedException {
         click(getQuote, "Click on Get Quote");
     }
@@ -161,12 +259,27 @@ public class RegisterPageTravelers extends BasePage {
 
     public void AgesOfTravelers() throws InterruptedException {
         click(TravelerAge, "");
+        Thread.sleep(1000);
         click(SelectedTravelerAge, "");
+    }
+
+    public void TravelerTypeOfInternationalVisitor() throws InterruptedException {
+        click(SelectTravelerType,"");
+        click(TravelerTypeOption,"");
 
     }
+    public void TravelerTypeOfInternationalStudent() throws InterruptedException {
+        click(SelectTravelerType,"");
+        click(InternationalStudent,"");
+    }
+    public void TravelerTypeOfUSLocal() throws InterruptedException {
+        click(SelectTravelerType,"");
+        click(USLocal,"");
+    }
+
     public void clickNext() throws InterruptedException {
         Thread.sleep(1000);
-        scrollDowns(scroller, 50);
+        scrollDowns(scroller, 40);
         click(next, "Click Next");
     }
 
@@ -174,7 +287,9 @@ public class RegisterPageTravelers extends BasePage {
         click(comprehensivePlan, "Select the plan");
     }
 
-    public void clickNextComprehensive() {
+    public void clickNextComprehensive() throws InterruptedException {
+        Thread.sleep(1000);
+        scrollDowns(scroller, 40);
         click(nextButtonComprehensive, "Click on Next button");
     }
 
@@ -198,6 +313,9 @@ public class RegisterPageTravelers extends BasePage {
         enterValue(dateOfBirth, "04/20/1998", "Date of Birth successfully");
         enterValue(address, "near station", "Address successfully");
         enterValue(city, "California", "Enter City successfully");
+        click(state,"");
+        Thread.sleep(10000);
+        click(SelectState,"");
         enterValue(postalCode, CreatedZipNumber(), "Enter Postal Code successfully");
         MemberEmail= CreatedDummyEmail();
         enterValue(emailUsername, MemberEmail, "Email/Username successfully");
@@ -293,6 +411,8 @@ public class RegisterPageTravelers extends BasePage {
         click(date, "Click on date successfully");
         click(dateSelect, "Select date successfully");
         enterValue(nameOnCard, CreatedDummyName(), "Name on Card successfully");
+        click(ClickYear,"");
+        click(selectYear,"");
         enterValue(cvv, "123", "CVV successfully");
         click(chkTerms, "Select check Terms successfully");
         Thread.sleep(100);
@@ -304,22 +424,21 @@ public class RegisterPageTravelers extends BasePage {
         Thread.sleep(1000);
         Assert.assertTrue(actualTitle.contains("Member Registration"));
     }
+
+
+
     public  void NumberOfTravelers() throws InterruptedException {
+        WebElement element = driver.findElement(TravelersNum);
+        String actualCountNo = element.getAttribute("value");
 
-        String policyMaxAmountText = getText(Policy_Max);
-
-        click(BackBTN, "");
-        clearText(notraveler);
-        String actualCountNo= TravelersNumber();
-        enterValue(notraveler,actualCountNo, "no successfully");
-        double traverlcounts = Double.parseDouble(actualCountNo);
-
-        click(getQuote, "Click on get Quote");
-        Thread.sleep(1000);
-        String policyMaxAmountText2 = getText(Policy_Max);
+        if (actualCountNo == null || actualCountNo.isEmpty()) {
+            actualCountNo = element.getText();
+        }
+        System.out.println("Traveler count : " + actualCountNo);
+        double travelerCounts = Double.parseDouble(actualCountNo);
 
         double policyMaxAmount2 = Double.parseDouble(policyMaxAmountText2.replace("$", "").replace(",", "").trim());
-        double totalPolicyAmount = policyMaxAmount2 * traverlcounts;
+        double totalPolicyAmount = policyMaxAmount2 * travelerCounts;
 
         String amountDueTotalText2 = getText(Amount_Due);
         double finalAmountDue = Double.parseDouble(amountDueTotalText2.replace("$", "").replace(",", "").trim());
@@ -361,9 +480,9 @@ public class RegisterPageTravelers extends BasePage {
     public void registerPremiumComprehensivePlan() throws InterruptedException {
         Reporter.log("********* " + new Throwable().getStackTrace()[0].getMethodName() + " *********");
         clickRegister();
-        clickTravelers();
-        selectPremiumComprehensive();
-        fillDatesForm();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalVisitor();
         SelectGetQuote();
         clickNext();
         fillTravelerForm();
@@ -395,11 +514,11 @@ public class RegisterPageTravelers extends BasePage {
     public void registerComprehensivePlan() throws InterruptedException {
         Reporter.log("********* " + new Throwable().getStackTrace()[0].getMethodName() + " *********");
         clickRegister();
-        clickTravelers();
-        selectEssentialComprehensive();
-        fillDatesForm();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalVisitor();
         SelectGetQuote();
-        selectQuoteForEssentialPlan();
+        selectEssentialComprehensive();
         clickNext();
         fillTravelerForm();
         clickNextComprehensive();
@@ -409,11 +528,11 @@ public class RegisterPageTravelers extends BasePage {
     }
     public void registerOptimumComprehensivePlan() throws InterruptedException {
         clickRegister();
-        clickTravelers();
-        selectOptimumComprehensiveTravelPlan();
-        fillDatesForm();
+        fillPlanQuotesForm();
         AgesOfTravelers();
+        TravelerTypeOfInternationalVisitor();
         SelectGetQuote();
+        selectOptimumComprehensiveTravelPlan();
         clickNext();
         fillTravelerForm();
         clickNextComprehensive();
@@ -425,47 +544,151 @@ public class RegisterPageTravelers extends BasePage {
 
     public void registerPrimaryCarePlan() throws InterruptedException {
         clickRegister();
-        clickTravelers();
-        selectPrimaryCare();
-        click(memberPlan, "Select member Plan");
-        clickNextMemberPlan();
-        Thread.sleep(10000);
-
-        enterValue(firstNameMember, CreatedDummyName(), "First Name successfully");
-        enterValue(lastNameMember, CreatedDummyName(), "Last Name successfully");
-        enterValue(dateOfBirthMember, "04/20/1998", "Date of Birth successfully");
-        enterValue(addressMember, "near station", "Address successfully");
-        enterValue(cityMember, "California", "City successfully");
-        enterValue(postalCodeMember, CreatedZipNumber(), "Postal Code successfully");
-        enterValue(emailUsernameMember, CreatedDummyEmail(), "Email/Username successfully");
-        enterValue(mobileCodeMember, "91", "Mobile Code successfully");
-        enterValue(mobileNumberMember, CreatedPhoneNumber(), "Mobile Number successfully");
-
-        enterMemberLoginCredentials();
-
-        enterValue(cardNumber, "4111111111111111", "Card Number successfully");
-        click(dateOfExpiry, "Click on date");
-        click(dateSelect, "Select date successfully");
-        enterValue(nameOnCard, CreatedDummyName(), "Name on Card successfully");
-        enterValue(cvv, "123", "CVV successfully");
-        click(checkTermsMember, "Select check Terms successfully");
-        click(makePaymentMember, "Click on Payment");
-
-        String actualTitle = driver.getTitle();
-        Assert.assertEquals(actualTitle, "MyPhysicianPlan New Member Registration", "Registration Confirmation");
-
-        Thread.sleep(10000);
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalVisitor();
+        SelectGetQuote();
+        selectPrimaryCarePlan();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
     }
+
+    public void registerForPremiumInternational_StudentPlan() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalStudent();
+        SelectGetQuote();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+    public void registerForEssentialInternational_StudentPlan() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalStudent();
+        SelectGetQuote();
+        selectEssentialComprehensive();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+
+    public void registerForPrimaryCareInternational_StudentPlan() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalStudent();
+        SelectGetQuote();
+        selectPrimaryCareInternationalStudent();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+    public void registerForUSCareWithUSLocalPlan() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesFormWithFirstDate();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfUSLocal();
+        SelectGetQuote();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+
+    public void registerForUSCareOptimumPlanWithUSLocalPlan() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesFormWithFirstDate();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfUSLocal();
+        SelectGetQuote();
+        selectUSCareOptimumPlan();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+    public void registerForUSCarePlusPlanWithUSLocal() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesFormWithFirstDate();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfUSLocal();
+        SelectGetQuote();
+        selectUSCarePlusPlan();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+
+    public void registerForUSCarePremiumPlanWithUSLocal() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesFormWithFirstDate();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfUSLocal();
+        SelectGetQuote();
+        selectUSCarePremiumPlan();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+
+    public void registerForPrimaryCarePlanWithUSLocal() throws InterruptedException {
+        clickRegister();
+        fillPlanQuotesFormWithFirstDate();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfUSLocal();
+        SelectGetQuote();
+        selectPrimaryCarePlanWithUSLocal();
+        clickNext();
+        fillTravelerForm();
+        clickNextComprehensive();
+        fillPaymentForm();
+        selectMakePayment();
+        AssertCall();
+    }
+
+
     public void RegistrationMultipleMembers() throws Exception {
         Reporter.log("********* " + new Throwable().getStackTrace()[0].getMethodName() + " *********");
         clickRegister();
-        clickTravelers();
-        selectPremiumComprehensive();
-        fillDatesForm();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalVisitor();
         SelectGetQuote();
+        AddTraveler();
+        clickNext();
         NumberOfTravelers();
         Reporter.log("Total Due Amount is verified");
-
     }
 
 }

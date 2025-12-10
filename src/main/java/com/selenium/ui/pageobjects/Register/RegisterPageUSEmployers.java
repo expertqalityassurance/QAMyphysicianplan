@@ -121,7 +121,7 @@ public class RegisterPageUSEmployers extends BasePage {
     By NewPassword = By.xpath("//input[@id='NewPassword']");
     By ConfirmPassword = By.xpath("//input[@id='ConfirmPassword']");
     By BTNSubmit = By.xpath("//*[@id='setPasswordModal']/div[2]/div[2]/div[3]/button");
-    By CheckBoxAuthentication = By.xpath("//*[@id='chk2factor']");
+    By CheckBoxAuthentication = By.xpath("//input[@id='chk2factor']");
     By NextBTN = By.xpath("//*[@id='tabstrip-2']/footer/button[2]");
 
 
@@ -202,12 +202,10 @@ public class RegisterPageUSEmployers extends BasePage {
         Thread.sleep(1000);
         enterValue(password, "Tester@1", "Password");
         enterValue(confirmPassword, "Tester@1", "Confirm password");
-        Thread.sleep(1000);
-        click(ButtonNext,"");
-        Thread.sleep(1000);
     }
 
     public void SelectCheckBoxAuthentication () throws InterruptedException {
+        Thread.sleep(1000);
        click(CheckBoxAuthentication,"");
        click(NextBTN,"");
     }
@@ -346,9 +344,6 @@ public class RegisterPageUSEmployers extends BasePage {
         Thread.sleep(1000);
         enterValue(ContactName,CreatedDummyName(),"Entered ContactName ");
         enterValue(ContactTitle,CreatedDummyName(),"Entered ContactTitle");
-        //enterValue(ContactEmail,CreatedDummyEmail(),"Entered ContactEmail");
-        //enterValue(Contact_PhoneCode,"310","Entered Contact_PhoneCode");
-        //enterValue(Contact_Phone,CreatedPhoneNumber(),"Entered Contact Number");
         click(SaveButton,"Click On Save Button");
         click(CheckBoxSelect,"Select CheckBox For Plan");
         enterValue(Contribution,"10","Entered Contribution");

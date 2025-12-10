@@ -667,10 +667,7 @@ public class BasePage {
         return result.toString();
     }
 
-    public String  TravelersNumber() {
-        TravelersNum = generateRandomNumbersfor(1);
-        return TravelersNum;
-    }
+
     public String generateRandomNumbersfor(int length) {
         String alphabet = "12345";
         StringBuilder result = new StringBuilder();

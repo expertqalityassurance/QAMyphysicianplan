@@ -57,7 +57,8 @@ public class RegisterPageTravelers extends BasePage {
     By address = By.xpath("//*[@id='Address']");
     By city = By.xpath("//*[@id='CityName']");
     By state = By.xpath("//span[@class='k-input'][normalize-space()='select']");
-    By SelectState = By.xpath("//*[@id='StateName_listbox']/li[2]");
+    By SelectState = By.xpath("//ul[@id='StateName_listbox']/li");
+    By EnterState = By.xpath("//*[@id='tabstrip-2']/div[3]/div[2]/span[2]/span/span[1]");
     By postalCode = By.xpath("//*[@id='Zip']");
     By emailUsername = By.xpath("//*[@id='Email']");
     By mobileCode = By.xpath("//*[@id='CountryCode']");
@@ -197,9 +198,8 @@ public class RegisterPageTravelers extends BasePage {
         policyMaxAmountText2 = element.getText();
         click(AddTraveler, "Click on Select Essential Plan For Travelers");
         click(MultiTraveler,"");
-        Thread.sleep(1000);
+        Thread.sleep(10000);
         click(SelectedSecondTravelerAge, "");
-
         return this;
     }
 
@@ -317,9 +317,7 @@ public class RegisterPageTravelers extends BasePage {
         enterValue(dateOfBirth, "04/20/1998", "Date of Birth successfully");
         enterValue(address, "near station", "Address successfully");
         enterValue(city, "California", "Enter City successfully");
-        click(state,"");
-        Thread.sleep(10000);
-        click(SelectState,"");
+        selectRandomState();
         enterValue(postalCode, CreatedZipNumber(), "Enter Postal Code successfully");
         MemberEmail= CreatedDummyEmail();
         enterValue(emailUsername, MemberEmail, "Email/Username successfully");
@@ -412,11 +410,9 @@ public class RegisterPageTravelers extends BasePage {
 
         public void fillPaymentForm() throws InterruptedException {
         enterValue(cardNumber, "4111111111111111", "Card Number successfully");
-        click(date, "Click on date successfully");
-        click(dateSelect, "Select date successfully");
+        selectRandomMonth();
         enterValue(nameOnCard, CreatedDummyName(), "Name on Card successfully");
-        click(ClickYear,"");
-        click(selectYear,"");
+        selectRandomYear();
         enterValue(cvv, "123", "CVV successfully");
         click(chkTerms, "Select check Terms successfully");
         Thread.sleep(100);
@@ -427,6 +423,33 @@ public class RegisterPageTravelers extends BasePage {
         System.out.println(actualTitle);
         Thread.sleep(1000);
         Assert.assertTrue(actualTitle.contains("Member Registration"));
+    }
+
+    public void selectRandomMonth() {
+        click(date, "");
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        List<WebElement> months = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.xpath("//ul[@id='MM_listbox']/li")
+                )
+        );
+
+        Random r = new Random();
+        months.get(r.nextInt(months.size())).click();
+    }
+
+    public void selectRandomYear() throws InterruptedException {
+        click(ClickYear,"");
+        Thread.sleep(500);
+        List<WebElement> years = driver.findElements(selectYear);
+
+        if (years.size() == 0) {
+            throw new RuntimeException("No years found in dropdown!");
+        }
+        Random r = new Random();
+        int index = r.nextInt(years.size());
+        years.get(index).click();
     }
 
 
@@ -494,6 +517,26 @@ public class RegisterPageTravelers extends BasePage {
         fillPaymentForm();
         selectMakePayment();
         AssertCall();
+    }
+
+    public void selectRandomState() {
+        // 1) Open dropdown
+        click(state,"");
+
+        // 2) Wait for the popup list to appear
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        List<WebElement> options = wait.until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                        By.xpath("//ul[@id='StateName_listbox']/li")
+                )
+        );
+
+        // 3) Pick random state
+        Random r = new Random();
+        int index = r.nextInt(options.size());
+
+        // 4) Click random state
+        options.get(index).click();
     }
 
     public void AddCoverage_to_pre_existingConditions() throws InterruptedException {

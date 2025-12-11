@@ -143,23 +143,27 @@ public class RegisterPageTravelers extends BasePage {
         return this;
     }
 
-    public RegisterPageTravelers selectEssentialComprehensive() {
+    public RegisterPageTravelers selectEssentialComprehensive() throws InterruptedException {
+        Thread.sleep(1000);
         click(selectEssentialPlan, "Click on Select Essential Plan For Travelers");
         return this;
     }
 
-    public RegisterPageTravelers selectOptimumComprehensiveTravelPlan() {
+    public RegisterPageTravelers selectOptimumComprehensiveTravelPlan() throws InterruptedException {
+        Thread.sleep(1000);
         click(OptimumComprehensivePlan, "Click on Select Essential Plan For Travelers");
         return this;
     }
 
-    public RegisterPageTravelers selectPrimaryCarePlan() {
+    public RegisterPageTravelers selectPrimaryCarePlan() throws InterruptedException {
+        Thread.sleep(1000);
         click(PrimaryCarePlan, "Click on Select Essential Plan For Travelers");
         return this;
     }
 
 
-    public RegisterPageTravelers selectPrimaryCareInternationalStudent() {
+    public RegisterPageTravelers selectPrimaryCareInternationalStudent() throws InterruptedException {
+        Thread.sleep(1000);
         click(PrimaryCareStudentPlan, "Click on Select Essential Plan For Travelers");
         return this;
     }

@@ -169,6 +169,7 @@ public class RegisterPageUSEmployers extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='divSignupPopup']/div/div[2]/div[2]/div[2]")));
         System.out.println("Popup text: " + popup.getText());
+        Thread.sleep(1000);
         String popupText = popup.getText();
         Assert.assertTrue(popupText.contains("You are registered successfully."), "Wrong PDF file opened!");
     }
@@ -177,6 +178,7 @@ public class RegisterPageUSEmployers extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='divSignupPopup']/div/div[2]/div[2]/div[2]")));
         System.out.println("Popup text: " + popup.getText());
+        Thread.sleep(1000);
         String popupText = popup.getText();
         Assert.assertTrue(popupText.contains("Preferred Appointment Timings:"), "Wrong PDF file opened!");
     }

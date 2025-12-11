@@ -10,10 +10,7 @@ import com.selenium.ui.testbase.TestBase;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.Reporter;
 
@@ -58,17 +55,30 @@ public class BasePage {
         }
     }
 
-    public void click(By locator, String desc) {
+    public void click(By locator, String log) {
         try {
-            waitHelper.waitForElementClickable(driver, locator, explicitWait, pollingTime).click();
-            if (!desc.isEmpty()) {
-                Reporter.log(desc);
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+            // Scroll to element
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+            Thread.sleep(300);
+
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+
+            try {
+                element.click(); // Normal click
+            } catch (ElementClickInterceptedException e) {
+                // Fallback to JS click
+                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
             }
+
         } catch (Exception e) {
-            logger.error("Exception thrown in Click function" + e);
-            Assert.assertTrue(false, "Not able to Click" + e);
+            throw new RuntimeException("Not able to Click: " + e);
         }
     }
+
 
     public void clickBySendKey(By locator, String desc) {
         try {

@@ -19,9 +19,7 @@ public class ExtentManager {
 	}
 
 	public static ExtentReports createInstance() {
-		String fileName = "src/main/resources/report/Automation.html";
-		//String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		//fileName = fileName.replace("TEMP",timeStamp);
+		String fileName = System.getProperty("user.dir") + "/test-output/ExtentReport/Automation.html";
 		ExtentSparkReporter htmlReporter = new ExtentSparkReporter(fileName);
 		htmlReporter.config().setTheme(Theme.DARK);
 		htmlReporter.config().setDocumentTitle(fileName);
@@ -31,4 +29,6 @@ public class ExtentManager {
 		extentreports.attachReporter(htmlReporter);
 		return extentreports;
 	}
+
+
 }

@@ -50,7 +50,7 @@ jobs:
           name: surefire-reports
           path: target/surefire-reports
 
-      # Upload Extent HTML Report (Your automation report)
+      # Upload Extent HTML Report (Your updated path)
       - name: Upload Extent HTML Report
         uses: actions/upload-artifact@v4
         with:

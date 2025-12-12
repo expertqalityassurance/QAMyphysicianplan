@@ -198,8 +198,15 @@ public class RegisterPageTravelers extends BasePage {
         policyMaxAmountText2 = element.getText();
         click(AddTraveler, "Click on Select Essential Plan For Travelers");
         click(MultiTraveler,"");
-        Thread.sleep(10000);
-        click(SelectedSecondTravelerAge, "");
+        Thread.sleep(1000);
+        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("age2")));
+        dropdown.click();
+        WebElement liElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[@id='age2_listbox']/li[28]")
+        ));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", liElement);
+        wait.until(ExpectedConditions.elementToBeClickable(liElement));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", liElement);
         return this;
     }
 

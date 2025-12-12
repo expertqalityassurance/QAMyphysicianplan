@@ -51,47 +51,47 @@
 		{
 		}
 	],
-	"TC014_RegistrationWithPreExistingMembers": [
+	"TC014_Login": [
 		{
 		}
 	],
-	"TC015_Login": [
+	"TC015_BookDoctor_Appointment": [
 		{
 		}
 	],
-	"TC016_BookDoctor_Appointment": [
+	"TC016_BookDoctor_AppointmentWithExistingMember": [
 		{
 		}
 	],
-	"TC017_BookDoctor_AppointmentWithExistingMember": [
+	"TC017_BookDoctor_AppointmentWithDateAvailable": [
 		{
 		}
 	],
-	"TC018_BookDoctor_AppointmentWithDateAvailable": [
+	"TC018_BookDoctor_AppointmentWithExistingMemberAvailableDate": [
 		{
 		}
 	],
-	"TC019_BookDoctor_AppointmentWithExistingMemberAvailableDate": [
+	"TC019_PlanSignupWithDoctor": [
 		{
 		}
 	],
-	"TC020_PlanSignupWithDoctor": [
+	"TC020_AmountDueCheckOfPlanWithDoctor": [
 		{
 		}
 	],
-	"TC021_AmountDueCheckOfPlanWithDoctor": [
+	"TC021_EmployerRegistration": [
 		{
 		}
 	],
-	"TC022_EmployerRegistration": [
+	"TC022_EmployerRegistrationWithCheckEmployeeLogin": [
 		{
 		}
 	],
-	"TC023_EmployerRegistrationWithCheckEmployeeLogin": [
+	"TC023_EmployerRegistrationWithCheckBusinessLogin": [
 		{
 		}
 	],
-	"TC024_EmployerRegistrationWithCheckBusinessLogin": [
+	"TC024_RegistrationWithFlexible_US_CarePage": [
 		{
 		}
 	],
@@ -99,15 +99,15 @@
 		{
 		}
 	],
-	"TC026_RegistrationWithFlexible_US_CarePage": [
+	"TC026_AddCoverage_to_preexisting_conditionsPolicyMax": [
 		{
 		}
 	],
-	"TC027_AddCoverage_to_preexisting_conditionsPolicyMax": [
+	"TC027_ToCheckPolicyMax_DueAmountWithTravelerCount": [
 		{
 		}
 	],
-	"TC028_ToCheckPolicyMax_DueAmountWithTravelerCount": [
+	"TC028_RegistrationWithPreExistingMembers": [
 		{
 		}
 	],

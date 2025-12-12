@@ -409,6 +409,7 @@ public class RegisterPageTravelers extends BasePage {
 
 
         public void fillPaymentForm() throws InterruptedException {
+        Thread.sleep(2000);
         enterValue(cardNumber, "4111111111111111", "Card Number successfully");
         selectRandomMonth();
         enterValue(nameOnCard, CreatedDummyName(), "Name on Card successfully");
@@ -427,14 +428,12 @@ public class RegisterPageTravelers extends BasePage {
 
     public void selectRandomMonth() {
         click(date, "");
-
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         List<WebElement> months = wait.until(
                 ExpectedConditions.visibilityOfAllElementsLocatedBy(
                         By.xpath("//ul[@id='MM_listbox']/li")
                 )
         );
-
         Random r = new Random();
         months.get(r.nextInt(months.size())).click();
     }
@@ -447,6 +446,7 @@ public class RegisterPageTravelers extends BasePage {
         if (years.size() == 0) {
             throw new RuntimeException("No years found in dropdown!");
         }
+        Thread.sleep(1000);
         Random r = new Random();
         int index = r.nextInt(years.size());
         years.get(index).click();
@@ -482,13 +482,16 @@ public class RegisterPageTravelers extends BasePage {
     public void RegistrationPreExisting() throws Exception {
         Reporter.log("********* " + new Throwable().getStackTrace()[0].getMethodName() + " *********");
         clickRegister();
-        clickTravelers();
-        selectPremiumComprehensive();
-        fillDatesForm();
+        fillPlanQuotesForm();
+        AgesOfTravelers();
+        TravelerTypeOfInternationalVisitor();
         SelectGetQuote();
-        String policyMaxAmountText = getText(Policy_Max);
+        clickNext();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(Policy_Max));
+        String policyMaxAmountText = element.getText();
         double policyMaxAmount = Double.parseDouble(policyMaxAmountText.replace("$", "").replace(",", "").trim());
-        click(chkPreExistingConditions,"Click on pre Existing Condition");
+        //click(chkPreExistingConditions,"Click on pre Existing Condition");
 
         String policyMaxAmountText2 = getText(Policy_Max);
         double policyMaxAmount2 = Double.parseDouble(policyMaxAmountText2.replace("$", "").replace(",", "").trim());

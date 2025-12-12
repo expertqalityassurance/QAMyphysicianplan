@@ -3,8 +3,11 @@ package com.selenium.ui.pageobjects.Register;
 import com.selenium.ui.pageobjects.common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 public class RegisterPlanSignupWithDr extends BasePage {
@@ -57,13 +60,12 @@ public class RegisterPlanSignupWithDr extends BasePage {
 
     }
     public void selectRandomPlan() throws InterruptedException {
-        Thread.sleep(2000);
-        // Get all plan radio buttons
-        List<WebElement> allPlans = driver.findElements(By.xpath("//input[@class='defaultPlanRadio']"));
-        if (allPlans.isEmpty()) {
-            System.out.println("❌ No plans found!");
-            return;
-        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        List<WebElement> allPlans = wait.until(
+                ExpectedConditions.presenceOfAllElementsLocatedBy(
+                        By.xpath("//input[@class='defaultPlanRadio']")
+                )
+        );
         scrollDowns(scroller,70);
         Thread.sleep(1000);
         // Pick a random one
@@ -73,13 +75,9 @@ public class RegisterPlanSignupWithDr extends BasePage {
         Thread.sleep(10000);
         randomPlan.click();
         Thread.sleep(10000);
-
-        // Get the plan name text using parent/ancestor lookup
         WebElement planNameElement = randomPlan.findElement(By.xpath("./ancestor::tr//a"));
         String planName = planNameElement.getText().trim();
-
         String price = planName.replaceAll(".*\\$(\\d+(?:\\.\\d+)?).*", "$1");
-
         priceValue = Double.parseDouble(price);
         System.out.println("Plan value" + priceValue);
     }

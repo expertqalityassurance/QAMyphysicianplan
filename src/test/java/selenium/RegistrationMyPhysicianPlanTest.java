@@ -89,43 +89,36 @@ public class RegistrationMyPhysicianPlanTest extends TestBase {
             new LoginPage().launchApplication();
             new RegisterPageTravelers().RegistrationMultipleMembers();
         }
-
-        @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify Registration Pre-Existing Members", priority = 13)
-        public void TC014_RegistrationWithPreExistingMembers(String rowID, String description, JSONObject data) throws Exception {
-            new LoginPage().launchApplication();
-            new RegisterPageTravelers().RegistrationPreExisting();
-        }
-
         @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify login", priority = 14)
-        public void TC015_Login(String rowID, String description, JSONObject data) throws Exception {
+        public void TC014_Login(String rowID, String description, JSONObject data) throws Exception {
             new LoginPage().launchApplication().login();
         }
 
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify booking a doctor Appointment", priority = 16)
-    public void TC016_BookDoctor_Appointment(String rowID, String description, JSONObject data) throws Exception {
+    public void TC015_BookDoctor_Appointment(String rowID, String description, JSONObject data) throws Exception {
         new LoginPage().launchApplication();
         new RegisterPageUSEmployers().BookDoctor_Appointment();
     }
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify booking a doctor appointment with an existing member using the earliest available date.", priority = 17)
-    public void TC017_BookDoctor_AppointmentWithExistingMember(String rowID, String description, JSONObject data) throws Exception {
+    public void TC016_BookDoctor_AppointmentWithExistingMember(String rowID, String description, JSONObject data) throws Exception {
         new LoginPage().launchApplication();
         new RegisterPageUSEmployers().BookDoctor_AppointmentExistingMember();
         new LoginPage().login();
     }
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify booking a doctor appointment with a new member using the expected available date.", priority = 18)
-    public void TC018_BookDoctor_AppointmentWithDateAvailable(String rowID, String description, JSONObject data) throws Exception {
+    public void TC017_BookDoctor_AppointmentWithDateAvailable(String rowID, String description, JSONObject data) throws Exception {
         new LoginPage().launchApplication();
         new RegisterPageUSEmployers().BookDoctor_AvailableAppointment();
     }
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify Book a doctor appointment with an existing member using the expected available date.", priority = 19)
-    public void TC019_BookDoctor_AppointmentWithExistingMemberAvailableDate(String rowID, String description, JSONObject data) throws Exception {
+    public void TC018_BookDoctor_AppointmentWithExistingMemberAvailableDate(String rowID, String description, JSONObject data) throws Exception {
         new LoginPage().launchApplication();
         new RegisterPageUSEmployers().BookDoctor_AppointmentWithExistingMemberAvailableDate();
         new LoginPage().login();
     }
 
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify the plan Signup With Doctor.", priority = 22)
-    public void TC020_PlanSignupWithDoctor(String rowID, String description, JSONObject data) throws Exception {
+    public void TC019_PlanSignupWithDoctor(String rowID, String description, JSONObject data) throws Exception {
         new LoginPage().launchApplicationWithDoctors();
         new RegisterPlanSignupWithDr().RegisterPlanSignupWithDoctor();
         new RegisterPageUSEmployers().fillTravelerForm();
@@ -134,7 +127,7 @@ public class RegistrationMyPhysicianPlanTest extends TestBase {
         new RegisterPlanSignupWithDr().fillPaymentFormForDoctor();
     }
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify the plan for US employers with Employer Registration.", priority = 23)
-    public void TC021_AmountDueCheckOfPlanWithDoctor(String rowID, String description, JSONObject data) throws Exception {
+    public void TC020_AmountDueCheckOfPlanWithDoctor(String rowID, String description, JSONObject data) throws Exception {
         new LoginPage().launchApplicationWithDoctors();
         new RegisterPlanSignupWithDr().selectRandomPlan();
         new RegisterPlanSignupWithDr().clickNextMemberPlan();

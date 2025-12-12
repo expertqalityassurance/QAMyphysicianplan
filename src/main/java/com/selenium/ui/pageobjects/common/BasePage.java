@@ -744,6 +744,18 @@ public class BasePage {
             e.printStackTrace();
         }
     }
+    public void scrollUp(By locator, int pixels) {
+        try {
+            WebElement element = driver.findElement(locator);
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].scrollTop = arguments[0].scrollTop - arguments[1];",
+                    element, pixels);
+            Thread.sleep(300);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public boolean checkElementIsVisible(By locator, String message) {
         try {

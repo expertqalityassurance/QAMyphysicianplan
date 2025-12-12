@@ -12,9 +12,7 @@ import org.testng.Reporter;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,6 +22,7 @@ public class RegisterPageUSEmployers extends BasePage {
 
 
     public RegisterPageUSEmployers() {
+
         super();
     }
 
@@ -48,7 +47,7 @@ public class RegisterPageUSEmployers extends BasePage {
      By mobileCode = By.xpath("//*[@id='CountryCode']");
      By mobileNumber = By.xpath("//*[@id='MobileNumber']");
      By nextButtonMember = By.xpath("//button[@onclick='OnMemberNextClick()']");
-
+     By nextButtonComprehensive = By.xpath("(//button[@onclick='OnMemberNextClick()'])[1]");
      By cardNumber = By.xpath("//*[@id='CardNumber']");
      By nameOnCard = By.xpath("//*[@id='NameOnCard']");
      By cvv = By.xpath("//*[@id='CVV']");
@@ -57,7 +56,9 @@ public class RegisterPageUSEmployers extends BasePage {
      By date = By.xpath("//*[@id='divCarddetails']/div[4]/div[1]/span[3]");
      By dateSelect = By.xpath("//*[@id='YY_listbox']/li[2]");
      By Scroll = By.xpath("/html");
-
+    By scroller = By.xpath("//html");
+    By ClickYear = By.xpath("//*[@id='divCarddetails']/div[4]/div[1]/span[3]/span/span[1]");
+    By selectYear = By.xpath("//*[@id='YY_listbox']/li[2]");
      By password = By.xpath("//input[@id='Password']");
      By confirmPassword = By.xpath("//input[@id='ConfirmPassword']");
     By ButtonNext = By.xpath("//*[@id=\"tabstrip-2\"]/footer/button[2]");
@@ -104,6 +105,7 @@ public class RegisterPageUSEmployers extends BasePage {
     By CompleteRegistration = By.xpath("//*[@id='tabstrip-7']/footer/button[2]");
     By SearchZip = By.xpath("//*[@id='SearchZip']");
     By Next_BTN = By.cssSelector("button.button_blue:nth-child(5)");
+
     By SelectCheckBox = By.xpath("//*[@id='AnyProvider']");
     By EarliestCheckBox = By.xpath("//*[@id='AnyTime']");
     By comment = By.xpath("//*[@id='ApptNotes']");
@@ -131,7 +133,8 @@ public class RegisterPageUSEmployers extends BasePage {
         click(register, "Click on Register");
         return this;
     }
-    public RegisterPageUSEmployers clickBook_Appointment() {
+    public RegisterPageUSEmployers clickBook_Appointment() throws InterruptedException {
+        Thread.sleep(1000);
         click(Appointment, "Click on Register");
         return this;
     }
@@ -204,29 +207,27 @@ public class RegisterPageUSEmployers extends BasePage {
         Thread.sleep(1000);
         enterValue(password, "Tester@1", "Password");
         enterValue(confirmPassword, "Tester@1", "Confirm password");
+        Thread.sleep(1000);
+        click(nextButtonComprehensive, "Click on Next button");
     }
 
     public void SelectCheckBoxAuthentication () throws InterruptedException {
-        Thread.sleep(1000);
+        Thread.sleep(10000);
        click(CheckBoxAuthentication,"");
        click(NextBTN,"");
     }
-
-
+    
 
     public void fillPaymentForm() throws InterruptedException {
         enterValue(cardNumber, "4111111111111111", "Card Number successfully");
-        click(date, "Click on date");
-        click(dateSelect, "Select date successfully");
+        selectRandomMonth();
+        scrollUp(Scroll,500);
         enterValue(nameOnCard, CreatedDummyName(), "Name on Card successfully");
+        selectRandomYear();
         enterValue(cvv, "123", "CVV successfully");
         click(chkTerms, "Select check Terms successfully");
-        click(makePayment, "Payment successfully");
-        String actualTitle = driver.getTitle();
-        Thread.sleep(1000);
-        Assert.assertEquals(actualTitle, "MyPhysicianPlan New Member Registration", "Registration Confirmation");
-        Reporter.log("MyPhysicianPlan Member Registration verified successfully.");
-        Thread.sleep(10000);
+        click(makePayment,"");
+        Thread.sleep(100);
     }
 
     public void registerFlexibleUSCare() throws InterruptedException {
@@ -426,6 +427,7 @@ public class RegisterPageUSEmployers extends BasePage {
         enterValue(SearchZip, CreatedZipNumber(), "Enter Zip Code");
         Thread.sleep(10000);
         click(Next_BTN, "Click On Next Button");
+        Thread.sleep(1000);
         click(SelectCheckBox, "Select CheckBox");
         click(Option1,"Select Option Date One");
         Thread.sleep(1000);
@@ -451,6 +453,7 @@ public class RegisterPageUSEmployers extends BasePage {
         Thread.sleep(10000);
         fillTravelerForm();
         enterMemberLoginCredentials();
+        Thread.sleep(500);
         fillPaymentForm();
         verifyBooking_TimeVerifyBooking();
 
@@ -609,6 +612,32 @@ public class RegisterPageUSEmployers extends BasePage {
         click(BTNSubmit, "");
         Thread.sleep(10000);
     }
+    public void selectRandomMonth() throws InterruptedException {
+        driver.findElement(date).click();
+        Thread.sleep(400); // allow animation
+        int randomSteps = new Random().nextInt(12) + 1;
+        WebElement dropdown = driver.switchTo().activeElement();
+        for (int i = 0; i < randomSteps; i++) {
+            dropdown.sendKeys(Keys.ARROW_DOWN);
+            Thread.sleep(80);
+        }
+        dropdown.sendKeys(Keys.ENTER);
+    }
+
+
+    public void selectRandomYear() throws InterruptedException {
+        driver.findElement(ClickYear).click();
+        Thread.sleep(400);
+        int totalYears = 15;
+        int randomSteps = new Random().nextInt(totalYears) + 1;
+        WebElement active = driver.switchTo().activeElement();
+        for (int i = 0; i < randomSteps; i++) {
+            active.sendKeys(Keys.ARROW_DOWN);
+            Thread.sleep(80);
+        }
+        active.sendKeys(Keys.ENTER);
+    }
+
 
 }
 

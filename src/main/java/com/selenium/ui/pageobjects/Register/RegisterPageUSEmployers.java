@@ -216,7 +216,7 @@ public class RegisterPageUSEmployers extends BasePage {
        click(CheckBoxAuthentication,"");
        click(NextBTN,"");
     }
-    
+
 
     public void fillPaymentForm() throws InterruptedException {
         enterValue(cardNumber, "4111111111111111", "Card Number successfully");

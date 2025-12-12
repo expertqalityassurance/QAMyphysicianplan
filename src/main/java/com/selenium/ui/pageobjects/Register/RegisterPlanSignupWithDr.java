@@ -2,6 +2,7 @@ package com.selenium.ui.pageobjects.Register;
 
 import com.selenium.ui.pageobjects.common.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -60,27 +61,27 @@ public class RegisterPlanSignupWithDr extends BasePage {
 
     }
     public void selectRandomPlan() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         List<WebElement> allPlans = wait.until(
                 ExpectedConditions.presenceOfAllElementsLocatedBy(
                         By.xpath("//input[@class='defaultPlanRadio']")
                 )
         );
-        scrollDowns(scroller,70);
-        Thread.sleep(1000);
-        // Pick a random one
+
         Random rand = new Random();
         int randomIndex = rand.nextInt(allPlans.size());
         WebElement randomPlan = allPlans.get(randomIndex);
-        Thread.sleep(10000);
-        randomPlan.click();
-        Thread.sleep(10000);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block:'center'});", randomPlan);
+        wait.until(ExpectedConditions.elementToBeClickable(randomPlan));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", randomPlan);
         WebElement planNameElement = randomPlan.findElement(By.xpath("./ancestor::tr//a"));
         String planName = planNameElement.getText().trim();
         String price = planName.replaceAll(".*\\$(\\d+(?:\\.\\d+)?).*", "$1");
         priceValue = Double.parseDouble(price);
-        System.out.println("Plan value" + priceValue);
+        System.out.println("Plan value: " + priceValue);
     }
+
 
     public void clickOnNextMember() throws InterruptedException {
         scrollDowns(scroller,100);

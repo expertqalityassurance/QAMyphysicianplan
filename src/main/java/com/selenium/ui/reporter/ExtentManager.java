@@ -5,6 +5,8 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+import java.io.File;
+
 
 public class ExtentManager {
 
@@ -19,14 +21,19 @@ public class ExtentManager {
 	}
 
 	public static ExtentReports createInstance() {
-		String fileName = System.getProperty("user.dir") + "/test-output/ExtentReport/Automation.html";
-		ExtentSparkReporter htmlReporter = new ExtentSparkReporter(fileName);
-		htmlReporter.config().setTheme(Theme.DARK);
-		htmlReporter.config().setDocumentTitle(fileName);
-		htmlReporter.config().setEncoding("utf-8");
-		htmlReporter.config().setReportName("Myphysicianplan");
+
+		String reportDir = System.getProperty("user.dir") + "/test-output/ExtentReport/";
+		File folder = new File(reportDir);
+		if (!folder.exists()) {
+			folder.mkdirs(); // creates test-output AND ExtentReport if missing
+		}
+		String filePath = reportDir + "Automation.html";
+		ExtentSparkReporter reporter = new ExtentSparkReporter(filePath);
+		reporter.config().setTheme(Theme.DARK);
+		reporter.config().setReportName("Myphysicianplan");
+		reporter.config().setDocumentTitle("Automation Report");
 		extentreports = new ExtentReports();
-		extentreports.attachReporter(htmlReporter);
+		extentreports.attachReporter(reporter);
 		return extentreports;
 	}
 

@@ -112,7 +112,8 @@ public class RegisterPageTravelers extends BasePage {
     By MultiTraveler = By.xpath("//*[@id='ageContainer']/div[2]/span/span/span[1]");
     By SelectedTravelerAge = By.xpath("//*[@id=\"age1_listbox\"]/li[28]");
     By SelectedSecondTravelerAge = By.xpath("//*[@id='age2_listbox']/li[28]");
-    By SelectTravelerType = By.xpath("//*[@id='tabstrip-1']/div/div[3]/div/span[2]/span/span[1]");
+    //By SelectTravelerType = By.xpath("//*[@id='tabstrip-1']/div/div[3]/div/span[2]/span/span[1]");
+    By SelectTravelerType = By.xpath("(//*[@id='tabstrip-1']//span[contains(@class,'k-dropdown-wrap')])[1]");
     By TravelerTypeOption = By.xpath("//*[@id='MemberType_listbox']/li[2]");
     By BlackButton = By.xpath("//*[@id='tabstrip-2']/div/footer/button[1]");
     By Username = By.xpath("//input[@id='UserName']");

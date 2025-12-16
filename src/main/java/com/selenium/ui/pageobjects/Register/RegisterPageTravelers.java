@@ -28,7 +28,8 @@ public class RegisterPageTravelers extends BasePage {
     By register = By.cssSelector("div.col-lg-12:nth-child(2) > a:nth-child(6)");
     By travelers = By.xpath("//*[@id='headingTravelers']/h4/a");
     By selectPremiumPlan = By.cssSelector("#collapseTravelers > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > a:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > button:nth-child(2)");
-    By selectEssentialPlan = By.xpath("//*[@id='planSelection']/div[2]/label/input");
+    //By selectEssentialPlan = By.xpath("//*[@id='planSelection']/div[2]/label/input");
+    By selectEssentialPlan = By.xpath("//div[@id='planSelection']//label[contains(normalize-space(.),'Essential')]");
     By OptimumComprehensivePlan = By.xpath("//*[@id='planSelection']/div[3]/label/input");
     By PrimaryCarePlan = By.xpath("//*[@id='planSelection']/div[4]/label/input");
     By PrimaryCareStudentPlan = By.xpath("//*[@id='planSelection']/div[3]/label/input");
@@ -50,7 +51,6 @@ public class RegisterPageTravelers extends BasePage {
     By getQuote = By.xpath("//button[text()='Get Quote']");
     By NoOfTravelers = By.xpath("//*[@id='MemberCount']");
     By next = By.xpath("(//button[@onclick='OnDatesNext()'])[1]");
-
     By firstName = By.xpath("//input[@id='firstName1']");
     By lastName = By.xpath("//*[@id='lastName1']");
     By dateOfBirth = By.xpath("//*[@id='DOB1']");
@@ -67,7 +67,6 @@ public class RegisterPageTravelers extends BasePage {
     By nextButtonComprehensive = By.xpath("(//button[@onclick='OnMemberNextClick()'])[1]");
     By nextButtonMember = By.xpath("//*[@id='tabstrip-2']/footer/button[2]");
     By nextButtonMemberPlan = By.xpath("//*[@id='tabstrip-1']/div/footer/button");
-
     By cardNumber = By.xpath("//*[@id='CardNumber']");
     By nameOnCard = By.xpath("//*[@id='NameOnCard']");
     By cvv = By.xpath("//*[@id='CVV']");
@@ -110,7 +109,7 @@ public class RegisterPageTravelers extends BasePage {
     By selectMakePaymentBtn = By.xpath("//*[@id=\"tabstrip-3\"]/div/footer/button[2]");
     By TravelerAge = By.xpath("//*[@id='ageContainer']/div/span/span/span[1]");
     By MultiTraveler = By.xpath("//*[@id='ageContainer']/div[2]/span/span/span[1]");
-    By SelectedTravelerAge = By.xpath("//*[@id=\"age1_listbox\"]/li[28]");
+    By SelectedTravelerAge = By.xpath("(//ul[contains(@id,'age1_listbox') and not(contains(@style,'display: none'))]//li[normalize-space()='27'])[1]");
     By SelectedSecondTravelerAge = By.xpath("//*[@id='age2_listbox']/li[28]");
     //By SelectTravelerType = By.xpath("//*[@id='tabstrip-1']/div/div[3]/div/span[2]/span/span[1]");
     By SelectTravelerType = By.xpath("(//*[@id='tabstrip-1']//span[contains(@class,'k-dropdown-wrap')])[1]");
@@ -141,7 +140,7 @@ public class RegisterPageTravelers extends BasePage {
 
     public RegisterPageTravelers selectMakePayment() throws InterruptedException {
         click(selectMakePaymentBtn, "Click on Select Premium Plan Travelers");
-        Thread.sleep(100000);
+        Thread.sleep(1000);
         return this;
     }
 
@@ -193,25 +192,40 @@ public class RegisterPageTravelers extends BasePage {
         return this;
     }
 
-    public RegisterPageTravelers AddTraveler() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(Policy_Max));
+    public RegisterPageTravelers AddTraveler() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(Policy_Max)
+        );
         policyMaxAmountText2 = element.getText();
-        click(AddTraveler, "Click on Select Essential Plan For Travelers");
-        click(MultiTraveler,"");
-        Thread.sleep(1000);
-        WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("age2")));
-        dropdown.click();
-        WebElement liElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.xpath("//*[@id='age2_listbox']/li[28]")
-        ));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", liElement);
-        wait.until(ExpectedConditions.elementToBeClickable(liElement));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", liElement);
+
+        click(AddTraveler, "");
+        click(MultiTraveler, "");
+
+        // 1️⃣ Click age dropdown
+        WebElement dropdown = wait.until(
+                ExpectedConditions.elementToBeClickable(By.id("age2_option_selected"))
+        );
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", dropdown);
+
+        // 2️⃣ Select age from list
+        WebElement age27 = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//*[@id='age2_listbox']//li[text()='25']")
+                )
+        );
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView(true);", age27);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", age27);
+
         return this;
     }
 
-    public void fillDatesForm() throws InterruptedException {
+
+        public void fillDatesForm() throws InterruptedException {
         click(startDate, "Click on Start Date");
         enterValue(startDates, Keys.ENTER);
 
@@ -230,7 +244,6 @@ public class RegisterPageTravelers extends BasePage {
     public void fillPlanQuotesForm() throws InterruptedException {
         click(startDate, "Click on Start Date");
         enterValue(startDates, Keys.ENTER);
-
         click(endDate, "Click on End Date");
         enterValue(endDates, Keys.ARROW_DOWN);
         enterValue(endDates, Keys.ENTER);
@@ -270,12 +283,18 @@ public class RegisterPageTravelers extends BasePage {
     }
 
     public void AgesOfTravelers() throws InterruptedException {
-        click(TravelerAge, "");
-        Thread.sleep(1000);
-        click(SelectedTravelerAge, "");
-    }
 
-    public void TravelerTypeOfInternationalVisitor() throws InterruptedException {
+            click(TravelerAge, "");
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+            WebElement age27 = wait.until(
+                    ExpectedConditions.presenceOfElementLocated(
+                            By.xpath("/html/body/div[9]/div/ul/li[28]")
+                    )
+            );
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", age27);
+        }
+
+        public void TravelerTypeOfInternationalVisitor() throws InterruptedException {
         click(SelectTravelerType,"");
         click(TravelerTypeOption,"");
 
@@ -325,7 +344,7 @@ public class RegisterPageTravelers extends BasePage {
         enterValue(dateOfBirth, "04/20/1998", "Date of Birth successfully");
         enterValue(address, "near station", "Address successfully");
         enterValue(city, "California", "Enter City successfully");
-        selectRandomState();
+        //selectRandomState();
         enterValue(postalCode, CreatedZipNumber(), "Enter Postal Code successfully");
         MemberEmail= CreatedDummyEmail();
         enterValue(emailUsername, MemberEmail, "Email/Username successfully");
@@ -428,10 +447,22 @@ public class RegisterPageTravelers extends BasePage {
 
     }
     public void AssertCall()throws InterruptedException {
-        String actualTitle = driver.getTitle();
-        System.out.println(actualTitle);
-        Thread.sleep(1000);
-        Assert.assertTrue(actualTitle.contains("Member Registration"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[1]")));
+        String popupText = popup.getText();
+        System.out.println(popupText);
+        String expectedMessage = "Visitor Plans";
+        Assert.assertEquals(popupText.trim(), expectedMessage, "Popup message is not as expected!");
+        Reporter.log("Registration Successful.");
+    }
+    public void AssertForUSLocalPlans()throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement popup = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body/div[2]/div[1]")));
+        String popupText = popup.getText();
+        System.out.println(popupText);
+        String expectedMessage = "US Local Plans";
+        Assert.assertEquals(popupText.trim(), expectedMessage, "Popup message is not as expected!");
+        Reporter.log("Registration Successful.");
     }
 
     public void selectRandomMonth() {
@@ -519,8 +550,8 @@ public class RegisterPageTravelers extends BasePage {
         Reporter.log("********* " + new Throwable().getStackTrace()[0].getMethodName() + " *********");
         clickRegister();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfInternationalVisitor();
+        AgesOfTravelers();
         SelectGetQuote();
         clickNext();
         fillTravelerForm();
@@ -573,8 +604,8 @@ public class RegisterPageTravelers extends BasePage {
         Reporter.log("********* " + new Throwable().getStackTrace()[0].getMethodName() + " *********");
         clickRegister();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfInternationalVisitor();
+        AgesOfTravelers();
         SelectGetQuote();
         selectEssentialComprehensive();
         clickNext();
@@ -587,8 +618,8 @@ public class RegisterPageTravelers extends BasePage {
     public void registerOptimumComprehensivePlan() throws InterruptedException {
         clickRegister();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfInternationalVisitor();
+        AgesOfTravelers();
         SelectGetQuote();
         selectOptimumComprehensiveTravelPlan();
         clickNext();
@@ -603,8 +634,8 @@ public class RegisterPageTravelers extends BasePage {
     public void registerPrimaryCarePlan() throws InterruptedException {
         clickRegister();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfInternationalVisitor();
+        AgesOfTravelers();
         SelectGetQuote();
         selectPrimaryCarePlan();
         clickNext();
@@ -618,8 +649,8 @@ public class RegisterPageTravelers extends BasePage {
     public void registerForPremiumInternational_StudentPlan() throws InterruptedException {
         clickRegister();
         fillPlanQuotesForm();
+        TravelerTypeOfInternationalVisitor();
         AgesOfTravelers();
-        TravelerTypeOfInternationalStudent();
         SelectGetQuote();
         clickNext();
         fillTravelerForm();
@@ -631,8 +662,8 @@ public class RegisterPageTravelers extends BasePage {
     public void registerForEssentialInternational_StudentPlan() throws InterruptedException {
         clickRegister();
         fillPlanQuotesForm();
+        TravelerTypeOfInternationalVisitor();
         AgesOfTravelers();
-        TravelerTypeOfInternationalStudent();
         SelectGetQuote();
         selectEssentialComprehensive();
         clickNext();
@@ -645,9 +676,10 @@ public class RegisterPageTravelers extends BasePage {
 
     public void registerForPrimaryCareInternational_StudentPlan() throws InterruptedException {
         clickRegister();
+        fillPlanQuotesFormWithFirstDate();
         fillPlanQuotesForm();
+        TravelerTypeOfInternationalVisitor();
         AgesOfTravelers();
-        TravelerTypeOfInternationalStudent();
         SelectGetQuote();
         selectPrimaryCareInternationalStudent();
         clickNext();
@@ -660,24 +692,24 @@ public class RegisterPageTravelers extends BasePage {
     public void registerForUSCareWithUSLocalPlan() throws InterruptedException {
         clickRegister();
         fillPlanQuotesFormWithFirstDate();
+        TravelerTypeOfUSLocal();
         fillPlanQuotesForm();
         AgesOfTravelers();
-        TravelerTypeOfUSLocal();
         SelectGetQuote();
         clickNext();
         fillTravelerForm();
         clickNextComprehensive();
         fillPaymentForm();
         selectMakePayment();
-        AssertCall();
+        AssertForUSLocalPlans();
     }
 
     public void registerForUSCareOptimumPlanWithUSLocalPlan() throws InterruptedException {
         clickRegister();
         fillPlanQuotesFormWithFirstDate();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfUSLocal();
+        AgesOfTravelers();
         SelectGetQuote();
         selectUSCareOptimumPlan();
         clickNext();
@@ -685,14 +717,14 @@ public class RegisterPageTravelers extends BasePage {
         clickNextComprehensive();
         fillPaymentForm();
         selectMakePayment();
-        AssertCall();
+        AssertForUSLocalPlans();
     }
     public void registerForUSCarePlusPlanWithUSLocal() throws InterruptedException {
         clickRegister();
         fillPlanQuotesFormWithFirstDate();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfUSLocal();
+        AgesOfTravelers();
         SelectGetQuote();
         selectUSCarePlusPlan();
         clickNext();
@@ -700,15 +732,15 @@ public class RegisterPageTravelers extends BasePage {
         clickNextComprehensive();
         fillPaymentForm();
         selectMakePayment();
-        AssertCall();
+        AssertForUSLocalPlans();
     }
 
     public void registerForUSCarePremiumPlanWithUSLocal() throws InterruptedException {
         clickRegister();
         fillPlanQuotesFormWithFirstDate();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfUSLocal();
+        AgesOfTravelers();
         SelectGetQuote();
         selectUSCarePremiumPlan();
         clickNext();
@@ -716,15 +748,15 @@ public class RegisterPageTravelers extends BasePage {
         clickNextComprehensive();
         fillPaymentForm();
         selectMakePayment();
-        AssertCall();
+        AssertForUSLocalPlans();
     }
 
     public void registerForPrimaryCarePlanWithUSLocal() throws InterruptedException {
         clickRegister();
         fillPlanQuotesFormWithFirstDate();
         fillPlanQuotesForm();
-        AgesOfTravelers();
         TravelerTypeOfUSLocal();
+        AgesOfTravelers();
         SelectGetQuote();
         selectPrimaryCarePlanWithUSLocal();
         clickNext();
@@ -732,7 +764,7 @@ public class RegisterPageTravelers extends BasePage {
         clickNextComprehensive();
         fillPaymentForm();
         selectMakePayment();
-        AssertCall();
+        AssertForUSLocalPlans();
     }
 
 
@@ -740,6 +772,7 @@ public class RegisterPageTravelers extends BasePage {
         Reporter.log("********* " + new Throwable().getStackTrace()[0].getMethodName() + " *********");
         clickRegister();
         fillPlanQuotesForm();
+        TravelerTypeOfInternationalVisitor();
         AgesOfTravelers();
         TravelerTypeOfInternationalVisitor();
         SelectGetQuote();

@@ -208,11 +208,11 @@ public class RegisterPageUSEmployers extends BasePage {
         enterValue(password, "Tester@1", "Password");
         enterValue(confirmPassword, "Tester@1", "Confirm password");
         Thread.sleep(1000);
-        click(nextButtonComprehensive, "Click on Next button");
+        //click(nextButtonComprehensive, "Click on Next button");
+        SelectCheckBoxAuthentication();
     }
 
     public void SelectCheckBoxAuthentication () throws InterruptedException {
-        Thread.sleep(10000);
        click(CheckBoxAuthentication,"");
        click(NextBTN,"");
     }

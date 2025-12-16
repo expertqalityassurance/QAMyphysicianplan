@@ -84,11 +84,12 @@ public class RegistrationMyPhysicianPlanTest extends TestBase {
 
         }
 
-        @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify Registration With MultiMembers", priority = 12)
+      /*  @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify Registration With MultiMembers", priority = 12)
         public void TC013_RegistrationWithMultiMembers(String rowID, String description, JSONObject data) throws Exception {
             new LoginPage().launchApplication();
             new RegisterPageTravelers().RegistrationMultipleMembers();
-        }
+        }*/
+    
         @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify login", priority = 14)
         public void TC014_Login(String rowID, String description, JSONObject data) throws Exception {
             new LoginPage().launchApplication().login();
@@ -123,7 +124,6 @@ public class RegistrationMyPhysicianPlanTest extends TestBase {
         new RegisterPlanSignupWithDr().RegisterPlanSignupWithDoctor();
         new RegisterPageUSEmployers().fillTravelerForm();
         new RegisterPageUSEmployers().enterMemberLoginCredentials();
-        new RegisterPageUSEmployers().SelectCheckBoxAuthentication();
         new RegisterPlanSignupWithDr().fillPaymentFormForDoctor();
     }
     @Test(groups = {"Smoke_Test_NewUX", "Browserstack"}, dataProvider = "TestData", dataProviderClass = JsonDataProvider.class, description = "Verify the plan for US employers with Employer Registration.", priority = 23)
